@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    ["module-alias", [
+        { "src": "./test/examples/components", "expose": "components" },
+        { "src": "npm:lodash", "expose": "underscore" }
+    ]]
+  ]
+}

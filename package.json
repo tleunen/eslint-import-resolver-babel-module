@@ -1,0 +1,57 @@
+{
+  "name": "eslint-import-resolver-babel-module-alias",
+  "version": "0.0.0-semantically-released",
+  "main": "lib/index.js",
+  "description": "babel-plugin-module-alias resolver for eslint-plugin-import",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tleunen/eslint-import-resolver-babel-module-alias.git"
+  },
+  "author": {
+    "name": "Tommy Leunen",
+    "email": "tommy.leunen@gmail.com",
+    "url": "http://tommyleunen.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "eslint",
+    "eslint-plugin-import",
+    "eslint-import-resolver",
+    "babel",
+    "babel-plugin",
+    "module",
+    "alias",
+    "rewrite",
+    "resolve",
+    "rename",
+    "mapping",
+    "require",
+    "import"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "babel-plugin-module-alias": "^1.4.0",
+    "chai": "^3.5.0",
+    "condition-node-version": "^1.3.0",
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb-base": "^1.0.4",
+    "eslint-plugin-import": "^1.6.0",
+    "lodash": "^4.11.1",
+    "mocha": "^2.4.5",
+    "resolve": "^1.1.7",
+    "semantic-release": "^4.3.5"
+  },
+  "release": {
+    "verifyConditions": {
+      "path": "condition-node-version",
+      "node": ">=6.0.0",
+      "verbose": true
+    }
+  },
+  "scripts": {
+    "lint": "eslint src test",
+    "pretest": "npm run lint",
+    "test": "mocha",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  }
+}
