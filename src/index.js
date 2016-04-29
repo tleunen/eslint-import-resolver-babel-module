@@ -3,17 +3,22 @@ const fs = require('fs');
 const resolve = require('resolve');
 const mapModule = require('babel-plugin-module-alias').mapModule;
 
-function getMappingFromBabelrc() {
-    const babelrcPath = path.join(process.cwd(), '.babelrc');
-    const babelrc = fs.readFileSync(babelrcPath, 'utf8');
+function getMappingFromBabel(start) {
+    if (!start) return [];
 
-    const babelrcJson = JSON.parse(babelrc);
-
-    if (babelrcJson && Array.isArray(babelrcJson.plugins)) {
-        const pluginConfig = babelrcJson.plugins.find(p => p[0] === 'module-alias');
-        return pluginConfig[1];
+    const babelrc = path.join(start, '.babelrc');
+    if (fs.existsSync(babelrc)) {
+        const babelrcJson = JSON.parse(fs.readFileSync(babelrc, 'utf8'));
+        if (babelrcJson && Array.isArray(babelrcJson.plugins)) {
+            const pluginConfig = babelrcJson.plugins.find(p => p[0] === 'module-alias');
+            // The src path inside babelrc are from the root so we have
+            // to change the working directory for the same directory
+            // to make the mapping to work properly
+            process.chdir(path.dirname(babelrc));
+            return pluginConfig[1];
+        }
     }
-    return [];
+    return getMappingFromBabel(path.dirname(start));
 }
 
 exports.interfaceVersion = 2;
@@ -28,10 +33,12 @@ exports.interfaceVersion = 2;
  * @return {object}
  */
 exports.resolve = (source, file/* , config */) => {
-    const mapping = getMappingFromBabelrc().reduce((memo, e) => {
+    const mapping = getMappingFromBabel(process.cwd()).reduce((memo, e) => {
         memo[e.expose] = e.src; // eslint-disable-line no-param-reassign
         return memo;
     }, {});
+
+    // throw new Error(JSON.stringify(getMappingFromBabel()));
 
     try {
         const src = mapModule(source, file, mapping) || source;
