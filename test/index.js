@@ -15,7 +15,7 @@ describe('eslint-import-resolver-module-alias', () => {
             .that.equals(2);
     });
 
-    it('should return true when mapped to a npm module', () => {
+    it('should return `true` when mapped to a npm module', () => {
         expect(resolverPlugin.resolve('underscore', path.resolve('./test/examples/file1'), opts))
             .to.eql({
                 found: true,
@@ -23,7 +23,7 @@ describe('eslint-import-resolver-module-alias', () => {
             });
     });
 
-    it('should return true when mapped to a file', () => {
+    it('should return `true` when mapped to a file', () => {
         expect(resolverPlugin.resolve('components/c1', path.resolve('./test/examples/components/subcomponent/sub/c2'), opts))
             .to.eql({
                 found: true,
@@ -31,7 +31,7 @@ describe('eslint-import-resolver-module-alias', () => {
             });
     });
 
-    it('should return true when no mapping is required', () => {
+    it('should return `true` when no mapping is required', () => {
         expect(resolverPlugin.resolve('./sub/sub/c2', path.resolve('./test/examples/components/c1'), opts))
             .to.eql({
                 found: true,
@@ -39,13 +39,20 @@ describe('eslint-import-resolver-module-alias', () => {
             });
     });
 
-    it('should return false when a module is not found', () => {
+    it('should return `false` when a module is not found', () => {
         expect(resolverPlugin.resolve('this_unknown_plugin', path.resolve('./test/example/file1'), opts))
             .to.eql({ found: false });
     });
 
-    it('should return false when the mapped file is not found', () => {
+    it('should return `false` when the mapped file is not found', () => {
         expect(resolverPlugin.resolve('components/noc1', path.resolve('./test/examples/components/subcomponent/sub/c2'), opts))
             .to.eql({ found: false });
+    });
+
+    it('should return `path: null` for core modules', () => {
+        expect(resolverPlugin.resolve('fs', path.resolve('./'), opts))
+            .to.eql({ found: true, path: null });
+        expect(resolverPlugin.resolve('path', path.resolve('./'), opts))
+            .to.eql({ found: true, path: null });
     });
 });
