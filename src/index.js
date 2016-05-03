@@ -39,6 +39,8 @@ exports.resolve = (source, file/* , config */) => {
         return memo;
     }, {});
 
+    if (resolve.isCore(source)) return { found: true, path: null };
+
     try {
         const src = mapModule(source, file, mapping) || source;
         return {
