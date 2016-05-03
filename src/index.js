@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const resolve = require('resolve');
+const JSON5 = require('json5');
 const mapModule = require('babel-plugin-module-alias').mapModule;
 
 function getMappingFromBabel(start) {
@@ -8,7 +9,7 @@ function getMappingFromBabel(start) {
 
     const babelrc = path.join(start, '.babelrc');
     if (fs.existsSync(babelrc)) {
-        const babelrcJson = JSON.parse(fs.readFileSync(babelrc, 'utf8'));
+        const babelrcJson = JSON5.parse(fs.readFileSync(babelrc, 'utf8'));
         if (babelrcJson && Array.isArray(babelrcJson.plugins)) {
             const pluginConfig = babelrcJson.plugins.find(p => p[0] === 'module-alias');
             // The src path inside babelrc are from the root so we have
@@ -37,8 +38,6 @@ exports.resolve = (source, file/* , config */) => {
         memo[e.expose] = e.src; // eslint-disable-line no-param-reassign
         return memo;
     }, {});
-
-    // throw new Error(JSON.stringify(getMappingFromBabel()));
 
     try {
         const src = mapModule(source, file, mapping) || source;
