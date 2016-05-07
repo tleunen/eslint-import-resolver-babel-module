@@ -45,11 +45,7 @@
     "semantic-release": "^4.3.5"
   },
   "release": {
-    "verifyConditions": {
-      "path": "condition-node-version",
-      "node": ">=6.0.0",
-      "verbose": true
-    }
+    "verifyConditions": "condition-circle"
   },
   "scripts": {
     "lint": "eslint src test",
