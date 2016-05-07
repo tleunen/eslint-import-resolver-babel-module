@@ -42,8 +42,10 @@ And see [babel-plugin-module-alias][module-alias] to know how to configure your 
 MIT, see [LICENSE.md](/LICENSE.md) for details.
 
 
-[travis-image]: https://travis-ci.org/tleunen/eslint-import-resolver-babel-module-alias.svg?branch=master
-[travis-url]: https://travis-ci.org/tleunen/eslint-import-resolver-babel-module-alias
+[ci-image]: https://circleci.com/gh/tleunen/eslint-import-resolver-babel-module-alias.svg?style=shield
+[ci-url]: https://circleci.com/gh/tleunen/eslint-import-resolver-babel-module-alias
+[coverage-image]: https://codecov.io/gh/tleunen/eslint-import-resolver-babel-module-alias/branch/master/graph/badge.svg
+[coverage-url]: https://codecov.io/gh/tleunen/eslint-import-resolver-babel-module-alias
 [npm-version-image]: https://img.shields.io/npm/v/eslint-import-resolver-babel-module-alias.svg
 [module-alias]: https://github.com/tleunen/babel-plugin-module-alias
 [eslint-plugin-import]: https://github.com/benmosher/eslint-plugin-import

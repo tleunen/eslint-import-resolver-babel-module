@@ -5,7 +5,7 @@ const JSON5 = require('json5');
 const mapModule = require('babel-plugin-module-alias').mapModule;
 
 function getMappingFromBabel(start) {
-    if (!start) return [];
+    if (start === '/') return [];
 
     const babelrc = path.join(start, '.babelrc');
     if (fs.existsSync(babelrc)) {
