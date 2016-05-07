@@ -1,4 +1,5 @@
-# eslint-import-resolver-babel-module-alias [![Build Status][travis-image]][travis-url] [![npm][npm-version-image]]()
+# eslint-import-resolver-babel-module-alias
+![npm][npm-version-image] [![Build Status][ci-image]][ci-url] [![Coverage Status][coverage-image]][coverage-url]
 
 A [babel-plugin-module-alias][module-alias] resolver for [eslint-plugin-import][eslint-plugin-import]
 
