@@ -6,6 +6,7 @@ const resolverPlugin = require('../src/index');
 
 const opts = {
 };
+const extensionOpts = { extensions: ['.js', '.jsx'] };
 
 describe('eslint-import-resolver-module-alias', () => {
     it('should export the interfaceVersion', () => {
@@ -54,5 +55,31 @@ describe('eslint-import-resolver-module-alias', () => {
             .to.eql({ found: true, path: null });
         expect(resolverPlugin.resolve('path', path.resolve('./'), opts))
             .to.eql({ found: true, path: null });
+    });
+
+    it('should return `false` with a file with an unknown extension', () => {
+        expect(resolverPlugin.resolve('./c3', path.resolve('./test/examples/components/c1'), opts))
+            .to.eql({ found: false });
+    });
+
+    it('should return `true` with a file with an expected extension', () => {
+        expect(resolverPlugin.resolve('./c3', path.resolve('./test/examples/components/c1'), extensionOpts))
+            .to.eql({
+                found: true,
+                path: path.resolve(__dirname, './examples/components/c3.jsx')
+            });
+    });
+
+    it('should return `false` when mapped to a file with an unknown extension', () => {
+        expect(resolverPlugin.resolve('components/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), opts))
+            .to.eql({ found: false });
+    });
+
+    it('should return `true` when mapped to a file with an expected extension', () => {
+        expect(resolverPlugin.resolve('components/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), extensionOpts))
+            .to.eql({
+                found: true,
+                path: path.resolve(__dirname, './examples/components/c3.jsx')
+            });
     });
 });
