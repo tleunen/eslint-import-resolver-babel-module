@@ -3,6 +3,7 @@ const fs = require('fs');
 const resolve = require('resolve');
 const JSON5 = require('json5');
 const mapModule = require('babel-plugin-module-alias').mapModule;
+const assign = require('object-assign');
 
 function getMappingFromBabel(start) {
     if (start === '/') return [];
@@ -22,6 +23,14 @@ function getMappingFromBabel(start) {
     return getMappingFromBabel(path.dirname(start));
 }
 
+function opts(file, config) {
+    return assign(
+        {},
+        config,
+        { basedir: path.dirname(file) }
+    );
+}
+
 exports.interfaceVersion = 2;
 
 /**
@@ -33,7 +42,7 @@ exports.interfaceVersion = 2;
  * @param  {object} config - the resolver options
  * @return {object}
  */
-exports.resolve = (source, file/* , config */) => {
+exports.resolve = (source, file, config) => {
     const mapping = getMappingFromBabel(process.cwd()).reduce((memo, e) => {
         memo[e.expose] = e.src; // eslint-disable-line no-param-reassign
         return memo;
@@ -45,9 +54,7 @@ exports.resolve = (source, file/* , config */) => {
         const src = mapModule(source, file, mapping) || source;
         return {
             found: true,
-            path: resolve.sync(src, {
-                basedir: path.dirname(file)
-            })
+            path: resolve.sync(src, opts(file, config)),
         };
     } catch (e) {
         return { found: false };
