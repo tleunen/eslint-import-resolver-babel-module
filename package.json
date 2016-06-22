@@ -29,7 +29,7 @@
     "import"
   ],
   "dependencies": {
-    "babel-plugin-module-alias": "^1.4.0",
+    "babel-plugin-module-alias": "^1.5.0",
     "json5": "^0.5.0",
     "object-assign": "^4.0.1",
     "resolve": "^1.1.7"
@@ -37,12 +37,12 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "condition-circle": "^1.2.0",
-    "eslint": "^2.8.0",
-    "eslint-config-airbnb-base": "^3.0.0",
-    "eslint-plugin-import": "^1.6.0",
-    "lodash": "^4.11.1",
-    "mocha": "^2.5.0",
-    "nyc": "^6.4.3",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.9.2",
+    "lodash": "^4.13.1",
+    "mocha": "^2.5.3",
+    "nyc": "^6.6.1",
     "semantic-release": "^4.3.5"
   },
   "release": {
@@ -51,9 +51,15 @@
   "scripts": {
     "lint": "eslint src test",
     "pretest": "npm run lint",
-    "test": "nyc mocha && nyc report --reporter=lcov",
+    "test": "nyc mocha",
     "test:suite": "mocha",
     "test:watch": "mocha -w",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   }
 }
