@@ -29,7 +29,7 @@
     "import"
   ],
   "dependencies": {
-    "babel-plugin-module-alias": "^1.4.0",
+    "babel-plugin-module-alias": "^1.4.1",
     "json5": "^0.5.0",
     "object-assign": "^4.0.1",
     "resolve": "^1.1.7"
