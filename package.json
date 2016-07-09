@@ -7,11 +7,7 @@
     "type": "git",
     "url": "https://github.com/tleunen/eslint-import-resolver-babel-module-alias.git"
   },
-  "author": {
-    "name": "Tommy Leunen",
-    "email": "tommy.leunen@gmail.com",
-    "url": "http://tommyleunen.com"
-  },
+  "author": "Tommy Leunen <tommy.leunen@gmail.com> (https://tommyleunen.com)",
   "license": "MIT",
   "keywords": [
     "eslint",
@@ -37,12 +33,12 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "condition-circle": "^1.2.0",
-    "eslint": "^2.13.1",
-    "eslint-config-airbnb-base": "^3.0.1",
-    "eslint-plugin-import": "^1.9.2",
+    "eslint": "^3.0.1",
+    "eslint-config-airbnb-base": "^4.0.0",
+    "eslint-plugin-import": "^1.10.2",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
-    "nyc": "^6.6.1",
+    "nyc": "^7.0.0",
     "semantic-release": "^4.3.5"
   },
   "release": {

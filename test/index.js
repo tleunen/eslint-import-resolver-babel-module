@@ -1,4 +1,10 @@
 /* eslint-env mocha */
+/*
+eslint import/no-extraneous-dependencies: [2, {
+  devDependencies: true,
+  optionalDependencies: false,
+}]
+*/
 const expect = require('chai').expect;
 
 const path = require('path');
