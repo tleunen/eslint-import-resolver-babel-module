@@ -42,7 +42,7 @@
     "eslint-plugin-import": "^1.9.2",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
-    "nyc": "^6.6.1",
+    "nyc": "^7.0.0",
     "semantic-release": "^4.3.5"
   },
   "release": {
