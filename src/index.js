@@ -1,26 +1,19 @@
 const path = require('path');
-const fs = require('fs');
 const resolve = require('resolve');
-const JSON5 = require('json5');
 const mapModule = require('babel-plugin-module-alias').mapModule;
 const assign = require('object-assign');
+const findBabelConfig = require('find-babel-config'); // eslint-disable-line
 
 function getMappingFromBabel(start) {
-    if (start === '/') return [];
-
-    const babelrc = path.join(start, '.babelrc');
-    if (fs.existsSync(babelrc)) {
-        const babelrcJson = JSON5.parse(fs.readFileSync(babelrc, 'utf8'));
-        if (babelrcJson && Array.isArray(babelrcJson.plugins)) {
-            const pluginConfig = babelrcJson.plugins.find(p => p[0] === 'module-alias');
-            // The src path inside babelrc are from the root so we have
-            // to change the working directory for the same directory
-            // to make the mapping to work properly
-            process.chdir(path.dirname(babelrc));
-            return pluginConfig[1];
-        }
+    const c = findBabelConfig(start);
+    if (c && c.config && Array.isArray(c.config.plugins)) {
+        const pluginConfig = c.config.plugins.find(p => p[0] === 'module-alias');
+        return pluginConfig[1];
     }
-    return getMappingFromBabel(path.dirname(start));
+
+    // istanbul ignore next
+    // cannot reach in this test suite
+    return [];
 }
 
 function opts(file, config) {
