@@ -32,17 +32,13 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "condition-circle": "^1.2.0",
     "eslint": "^3.0.1",
     "eslint-config-airbnb-base": "^4.0.0",
     "eslint-plugin-import": "^1.10.2",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
     "nyc": "^7.0.0",
-    "semantic-release": "^4.3.5"
-  },
-  "release": {
-    "verifyConditions": "condition-circle"
+    "standard-version": "^2.3.1"
   },
   "scripts": {
     "lint": "eslint src test",
@@ -50,7 +46,7 @@
     "test": "nyc mocha",
     "test:suite": "mocha",
     "test:watch": "mocha -w",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "release": "standard-version"
   },
   "nyc": {
     "reporter": [
