@@ -8,6 +8,10 @@ function getMappingFromBabel(start) {
     const c = findBabelConfig(start);
     if (c && c.config && Array.isArray(c.config.plugins)) {
         const pluginConfig = c.config.plugins.find(p => p[0] === 'module-alias');
+        // The src path inside babelrc are from the root so we have
+        // to change the working directory for the "current file directory"
+        // in order for the mapping in the editor (atom/sublime) to work properly
+        process.chdir(path.dirname(c.file));
         return pluginConfig[1];
     }
 
