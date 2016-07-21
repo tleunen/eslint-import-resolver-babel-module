@@ -40,7 +40,7 @@ exports.interfaceVersion = 2;
  * @return {object}
  */
 exports.resolve = (source, file, config) => {
-    const mapping = getMappingFromBabel(process.cwd()).reduce((memo, e) => {
+    const mapping = getMappingFromBabel(path.dirname(file)).reduce((memo, e) => {
         memo[e.expose] = e.src; // eslint-disable-line no-param-reassign
         return memo;
     }, {});
