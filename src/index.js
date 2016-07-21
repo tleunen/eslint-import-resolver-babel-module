@@ -6,13 +6,24 @@ const findBabelConfig = require('find-babel-config'); // eslint-disable-line
 
 function getMappingFromBabel(start) {
     const c = findBabelConfig(start);
-    if (c && c.config && Array.isArray(c.config.plugins)) {
-        const pluginConfig = c.config.plugins.find(p => p[0] === 'module-alias');
-        // The src path inside babelrc are from the root so we have
-        // to change the working directory for the "current file directory"
-        // in order for the mapping in the editor (atom/sublime) to work properly
-        process.chdir(path.dirname(c.file));
-        return pluginConfig[1];
+    const env = process.env.BABEL_ENV || process.env.NODE_ENV || 'development';
+    if (c && c.config) {
+        let pluginConfig;
+        if (Array.isArray(c.config.plugins)) {
+            pluginConfig = c.config.plugins.find(p => p[0] === 'module-alias');
+        }
+
+        if (c.config.env && c.config.env[env] && Array.isArray(c.config.env[env].plugins)) {
+            pluginConfig = c.config.env[env].plugins.find(p => p[0] === 'module-alias');
+        }
+
+        if (pluginConfig) {
+            // The src path inside babelrc are from the root so we have
+            // to change the working directory for the "current file directory"
+            // in order for the mapping in the editor (atom/sublime) to work properly
+            process.chdir(path.dirname(c.file));
+            return pluginConfig[1];
+        }
     }
 
     // istanbul ignore next
