@@ -63,29 +63,83 @@ describe('eslint-import-resolver-module-alias', () => {
             .to.eql({ found: true, path: null });
     });
 
-    it('should return `false` with a file with an unknown extension', () => {
-        expect(resolverPlugin.resolve('./c3', path.resolve('./test/examples/components/c1'), opts))
-            .to.eql({ found: false });
+    describe('with specific file extensions', () => {
+        it('should return `false` with a file with an unknown extension', () => {
+            expect(resolverPlugin.resolve('./c3', path.resolve('./test/examples/components/c1'), opts))
+                .to.eql({ found: false });
+        });
+
+        it('should return `true` with a file with an expected extension', () => {
+            expect(resolverPlugin.resolve('./c3', path.resolve('./test/examples/components/c1'), extensionOpts))
+                .to.eql({
+                    found: true,
+                    path: path.resolve(__dirname, './examples/components/c3.jsx')
+                });
+        });
+
+        it('should return `false` when mapped to a file with an unknown extension', () => {
+            expect(resolverPlugin.resolve('components/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), opts))
+                .to.eql({ found: false });
+        });
+
+        it('should return `true` when mapped to a file with an expected extension', () => {
+            expect(resolverPlugin.resolve('components/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), extensionOpts))
+                .to.eql({
+                    found: true,
+                    path: path.resolve(__dirname, './examples/components/c3.jsx')
+                });
+        });
     });
 
-    it('should return `true` with a file with an expected extension', () => {
-        expect(resolverPlugin.resolve('./c3', path.resolve('./test/examples/components/c1'), extensionOpts))
-            .to.eql({
-                found: true,
-                path: path.resolve(__dirname, './examples/components/c3.jsx')
+    describe('mapping only in specific environment', () => {
+        describe('when both the default and "env" are available', () => {
+            it('should return `false` when the mapping doesn\'t exist in "env"', () => {
+                const oldEnv = process.env.NODE_ENV;
+                process.env.NODE_ENV = 'development';
+
+                expect(resolverPlugin.resolve('subsub/c2', path.resolve('./test/examples/components/c1'), opts))
+                    .to.eql({ found: false });
+
+                process.env.NODE_ENV = oldEnv;
             });
-    });
 
-    it('should return `false` when mapped to a file with an unknown extension', () => {
-        expect(resolverPlugin.resolve('components/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), opts))
-            .to.eql({ found: false });
-    });
+            it('should return `true` when the mapping exists in the "env"', () => {
+                const oldEnv = process.env.NODE_ENV;
+                process.env.NODE_ENV = 'test';
 
-    it('should return `true` when mapped to a file with an expected extension', () => {
-        expect(resolverPlugin.resolve('components/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), extensionOpts))
-            .to.eql({
-                found: true,
-                path: path.resolve(__dirname, './examples/components/c3.jsx')
+                expect(resolverPlugin.resolve('subsub/c2', path.resolve('./test/examples/components/c1'), opts))
+                    .to.eql({
+                        found: true,
+                        path: path.resolve(__dirname, './examples/components/sub/sub/c2.js')
+                    });
+
+                process.env.NODE_ENV = oldEnv;
             });
+        });
+
+        describe('when ony specific env is available', () => {
+            it('should return `false` when the mapping doesn\'t exist in "env"', () => {
+                const oldEnv = process.env.NODE_ENV;
+                process.env.NODE_ENV = 'development';
+
+                expect(resolverPlugin.resolve('subsub/c2', path.resolve('./test/examples/components/sub/envonly/yo'), opts))
+                    .to.eql({ found: false });
+
+                process.env.NODE_ENV = oldEnv;
+            });
+
+            it('should return `true` when the mapping exists in the "env"', () => {
+                const oldEnv = process.env.NODE_ENV;
+                process.env.NODE_ENV = 'test';
+
+                expect(resolverPlugin.resolve('subsub/c2', path.resolve('./test/examples/components/sub/envonly/yo'), opts))
+                    .to.eql({
+                        found: true,
+                        path: path.resolve(__dirname, './examples/components/sub/sub/c2.js')
+                    });
+
+                process.env.NODE_ENV = oldEnv;
+            });
+        });
     });
 });

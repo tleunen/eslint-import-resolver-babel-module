@@ -4,5 +4,14 @@
         { "src": "./test/examples/components", "expose": "components" },
         { "src": "npm:lodash", "expose": "underscore" }
     ]]
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["module-alias", [
+          { "src": "./test/examples/components/sub/sub", "expose": "subsub" }
+        ]]
+      ]
+    }
+  }
 }
