@@ -25,20 +25,23 @@
     "import"
   ],
   "dependencies": {
-    "babel-plugin-module-alias": "^1.5.0",
     "find-babel-config": "^0.1.1",
     "object-assign": "^4.0.1",
     "resolve": "^1.1.7"
   },
   "devDependencies": {
+    "babel-plugin-module-alias": "^1.6.0",
     "chai": "^3.5.0",
     "eslint": "^3.1.1",
-    "eslint-config-airbnb-base": "^4.0.2",
-    "eslint-plugin-import": "^1.11.0",
+    "eslint-config-airbnb-base": "^5.0.0",
+    "eslint-plugin-import": "^1.11.1",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
     "nyc": "^7.0.0",
     "standard-version": "^2.4.0"
+  },
+  "peerDependencies": {
+    "babel-plugin-module-alias": "1.x"
   },
   "scripts": {
     "lint": "eslint src test",
