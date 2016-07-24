@@ -1,5 +1,5 @@
 # eslint-import-resolver-babel-module-alias
-![npm][npm-version-image] [![Build Status][ci-image]][ci-url] [![Coverage Status][coverage-image]][coverage-url]
+[![npm][npm-version-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coverage-image]][coverage-url]
 
 A [babel-plugin-module-alias][module-alias] resolver for [eslint-plugin-import][eslint-plugin-import]
 
@@ -48,5 +48,6 @@ MIT, see [LICENSE.md](/LICENSE.md) for details.
 [coverage-image]: https://codecov.io/gh/tleunen/eslint-import-resolver-babel-module-alias/branch/master/graph/badge.svg
 [coverage-url]: https://codecov.io/gh/tleunen/eslint-import-resolver-babel-module-alias
 [npm-version-image]: https://img.shields.io/npm/v/eslint-import-resolver-babel-module-alias.svg
+[npm-url]: https://www.npmjs.com/package/eslint-import-resolver-babel-module-alias
 [module-alias]: https://github.com/tleunen/babel-plugin-module-alias
 [eslint-plugin-import]: https://github.com/benmosher/eslint-plugin-import
