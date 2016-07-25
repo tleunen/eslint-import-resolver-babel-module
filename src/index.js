@@ -3,6 +3,7 @@ const resolve = require('resolve');
 const mapModule = require('babel-plugin-module-alias').mapModule;
 const assign = require('object-assign');
 const findBabelConfig = require('find-babel-config'); // eslint-disable-line
+const findRoot = require('find-root')
 
 function getMappingFromBabel(start) {
     const c = findBabelConfig(start);
@@ -11,7 +12,9 @@ function getMappingFromBabel(start) {
         // The src path inside babelrc are from the root so we have
         // to change the working directory for the "current file directory"
         // in order for the mapping in the editor (atom/sublime) to work properly
-        process.chdir(path.dirname(c.file));
+        
+        const root = findRoot(path.dirname(c.file))
+        process.chdir(root);
         return pluginConfig[1];
     }
 
