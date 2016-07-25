@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "find-babel-config": "^0.1.1",
+    "find-root": "^1.0.0",
     "object-assign": "^4.0.1",
     "resolve": "^1.1.7"
   },
