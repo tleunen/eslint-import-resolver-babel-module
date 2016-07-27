@@ -4,15 +4,40 @@ const mapModule = require('babel-plugin-module-alias').mapModule;
 const assign = require('object-assign');
 const findBabelConfig = require('find-babel-config'); // eslint-disable-line
 
+function findModuleAliasConfig(conf) {
+    return conf.plugins.find(p => p[0] === 'module-alias');
+}
+
 function getMappingFromBabel(start) {
+    // `let` is not supported outside of the strict mode in node 4 :/
+    // eslint-disable-next-line strict
+    'use strict';
+
     const c = findBabelConfig(start);
-    if (c && c.config && Array.isArray(c.config.plugins)) {
-        const pluginConfig = c.config.plugins.find(p => p[0] === 'module-alias');
-        // The src path inside babelrc are from the root so we have
-        // to change the working directory for the "current file directory"
-        // in order for the mapping in the editor (atom/sublime) to work properly
-        process.chdir(path.dirname(c.file));
-        return pluginConfig[1];
+    const env = process.env.BABEL_ENV || process.env.NODE_ENV || 'development';
+
+    if (c && c.config) {
+        let pluginConfig;
+        if (c.config.plugins) {
+            pluginConfig = findModuleAliasConfig(c.config);
+        }
+
+        if (c.config.env && c.config.env[env] && Array.isArray(c.config.env[env].plugins)) {
+            const envPluginConfig = findModuleAliasConfig(c.config.env[env]);
+            if (pluginConfig) {
+                pluginConfig[1] = pluginConfig[1].concat(envPluginConfig[1]);
+            } else {
+                pluginConfig = envPluginConfig;
+            }
+        }
+
+        if (pluginConfig) {
+            // The src path inside babelrc are from the root so we have
+            // to change the working directory for the "current file directory"
+            // in order for the mapping in the editor (atom/sublime) to work properly
+            process.chdir(path.dirname(c.file));
+            return pluginConfig[1];
+        }
     }
 
     // istanbul ignore next

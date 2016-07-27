@@ -1,0 +1,11 @@
+{
+  "env": {
+    "test": {
+      "plugins": [
+        ["module-alias", [
+          { "src": "../sub", "expose": "subsub" }
+        ]]
+      ]
+    }
+  }
+}
