@@ -8,7 +8,7 @@
   "env": {
     "test": {
       "plugins": [
-        ["module-alias", [
+        ["babel-plugin-module-alias", [
           { "src": "./test/examples/components/sub/sub", "expose": "subsub" }
         ]]
       ]

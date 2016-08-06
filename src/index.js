@@ -5,7 +5,7 @@ const assign = require('object-assign');
 const findBabelConfig = require('find-babel-config'); // eslint-disable-line
 
 function findModuleAliasConfig(conf) {
-    return conf.plugins.find(p => p[0] === 'module-alias');
+    return conf.plugins.find(p => p[0] === 'module-alias' || p[0] === 'babel-plugin-module-alias');
 }
 
 function getMappingFromBabel(start) {
