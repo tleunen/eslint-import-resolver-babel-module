@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/compare/v1.4.2...v1.5.0) (2016-08-06)
+
+
+### Bug Fixes
+
+* **resolver:** Add cascading support ([#17](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/issues/17)) ([dd94f0a](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/commit/dd94f0a)), closes [#15](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/issues/15)
+* Also search config with 'babel-plugin-' prefix name ([c7633d6](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/commit/c7633d6))
+
+
+### Features
+
+* Add "env" support ([#19](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/issues/19)) ([71431bd](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/commit/71431bd))
+
+
+
 <a name="1.4.2"></a>
 ## [1.4.2](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/compare/v1.4.1...v1.4.2) (2016-07-10)
 
