@@ -13,7 +13,7 @@ function getMappingFromBabel(start) {
     // eslint-disable-next-line strict
     'use strict';
 
-    const c = findBabelConfig(start);
+    const c = findBabelConfig.sync(start);
     const env = process.env.BABEL_ENV || process.env.NODE_ENV || 'development';
 
     if (c && c.config) {
