@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/compare/v1.5.0...v1.5.1) (2016-08-09)
+
+
+### Bug Fixes
+
+* Fix config lookup with specific environment ([50f4f6e](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/commit/50f4f6e)), closes [#22](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/issues/22)
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/compare/v1.4.2...v1.5.0) (2016-08-06)
 
