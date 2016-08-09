@@ -24,10 +24,12 @@ function getMappingFromBabel(start) {
 
         if (c.config.env && c.config.env[env] && Array.isArray(c.config.env[env].plugins)) {
             const envPluginConfig = findModuleAliasConfig(c.config.env[env]);
-            if (pluginConfig) {
-                pluginConfig[1] = pluginConfig[1].concat(envPluginConfig[1]);
-            } else {
-                pluginConfig = envPluginConfig;
+            if (envPluginConfig) {
+                if (pluginConfig) {
+                    pluginConfig[1] = pluginConfig[1].concat(envPluginConfig[1]);
+                } else {
+                    pluginConfig = envPluginConfig;
+                }
             }
         }
 
