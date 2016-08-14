@@ -59,7 +59,9 @@ exports.interfaceVersion = 2;
 exports.resolve = (source, file, options) => {
     if (resolve.isCore(source)) return { found: true, path: null };
 
-    const { file: babelrcPath, config } = findBabelConfig.sync(path.dirname(file));
+    const babelConfig = findBabelConfig.sync(path.dirname(file));
+    const babelrcPath = babelConfig.file;
+    const config = babelConfig.config;
     if (babelrcPath) {
         // Editor have a working directory equals to the directory in which `file` is located
         // But the babel plugin works with a working directory based on the babelrc file
