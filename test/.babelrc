@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "components": "./examples/components",
+        "underscore": "npm:lodash"
+      }
+    }]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["babel-plugin-module-resolver", {
+          "alias": {
+            "subsub": "./examples/components/sub/sub"
+          }
+        }]
+      ]
+    }
+  }
+}

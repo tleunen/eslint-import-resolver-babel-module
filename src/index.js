@@ -1,54 +1,44 @@
 const path = require('path');
 const resolve = require('resolve');
-const mapModule = require('babel-plugin-module-alias').mapModule;
-const assign = require('object-assign');
+const mapModule = require('babel-plugin-module-resolver').mapModule;
 const findBabelConfig = require('find-babel-config'); // eslint-disable-line
 
 function findModuleAliasConfig(conf) {
-    return conf.plugins.find(p => p[0] === 'module-alias' || p[0] === 'babel-plugin-module-alias');
+    if (conf.plugins) {
+        return conf.plugins.find(p => p[0] === 'module-resolver' || p[0] === 'babel-plugin-module-resolver');
+    }
+    return null;
 }
 
-function getMappingFromBabel(start) {
-    // `let` is not supported outside of the strict mode in node 4 :/
-    // eslint-disable-next-line strict
-    'use strict';
-
-    const c = findBabelConfig.sync(start);
+function getPluginOpts(config) {
     const env = process.env.BABEL_ENV || process.env.NODE_ENV || 'development';
 
-    if (c && c.config) {
-        let pluginConfig;
-        if (c.config.plugins) {
-            pluginConfig = findModuleAliasConfig(c.config);
-        }
+    if (config) {
+        const pluginConfig = findModuleAliasConfig(config);
 
-        if (c.config.env && c.config.env[env] && Array.isArray(c.config.env[env].plugins)) {
-            const envPluginConfig = findModuleAliasConfig(c.config.env[env]);
+        if (config.env && config.env[env]) {
+            const envPluginConfig = findModuleAliasConfig(config.env[env]);
             if (envPluginConfig) {
                 if (pluginConfig) {
-                    pluginConfig[1] = pluginConfig[1].concat(envPluginConfig[1]);
-                } else {
-                    pluginConfig = envPluginConfig;
+                    return {
+                        root: [].concat(pluginConfig[1].root, envPluginConfig[1].root),
+                        alias: Object.assign({}, pluginConfig[1].alias, envPluginConfig[1].alias)
+                    };
                 }
+                return envPluginConfig[1];
             }
         }
 
         if (pluginConfig) {
-            // The src path inside babelrc are from the root so we have
-            // to change the working directory for the "current file directory"
-            // in order for the mapping in the editor (atom/sublime) to work properly
-            process.chdir(path.dirname(c.file));
             return pluginConfig[1];
         }
     }
 
-    // istanbul ignore next
-    // cannot reach in this test suite
-    return [];
+    return {};
 }
 
 function opts(file, config) {
-    return assign(
+    return Object.assign(
         {},
         config,
         { basedir: path.dirname(file) }
@@ -63,22 +53,25 @@ exports.interfaceVersion = 2;
  * resolveImport('./foo', '/Users/ben/bar.js') => '/Users/ben/foo.js'
  * @param  {string} source - the module to resolve; i.e './some-module'
  * @param  {string} file - the importing file's full path; i.e. '/usr/local/bin/file.js'
- * @param  {object} config - the resolver options
+ * @param  {object} options - the resolver options
  * @return {object}
  */
-exports.resolve = (source, file, config) => {
-    const mapping = getMappingFromBabel(path.dirname(file)).reduce((memo, e) => {
-        memo[e.expose] = e.src; // eslint-disable-line no-param-reassign
-        return memo;
-    }, {});
-
+exports.resolve = (source, file, options) => {
     if (resolve.isCore(source)) return { found: true, path: null };
 
+    const { file: babelrcPath, config } = findBabelConfig.sync(path.dirname(file));
+    if (babelrcPath) {
+        // Editor have a working directory equals to the directory in which `file` is located
+        // But the babel plugin works with a working directory based on the babelrc file
+        process.chdir(path.dirname(babelrcPath));
+    }
+
     try {
-        const src = mapModule(source, file, mapping) || source;
+        const pluginOpts = getPluginOpts(config);
+        const src = mapModule(source, file, pluginOpts) || source;
         return {
             found: true,
-            path: resolve.sync(src, opts(file, config)),
+            path: resolve.sync(src, opts(file, options)),
         };
     } catch (e) {
         return { found: false };

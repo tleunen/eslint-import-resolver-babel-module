@@ -1,11 +1,11 @@
 {
-  "name": "eslint-import-resolver-babel-module-alias",
+  "name": "eslint-import-resolver-babel-module",
   "version": "1.5.1",
   "main": "src/index.js",
-  "description": "babel-plugin-module-alias resolver for eslint-plugin-import",
+  "description": "babel-plugin-module-resolver resolver for eslint-plugin-import",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tleunen/eslint-import-resolver-babel-module-alias.git"
+    "url": "https://github.com/tleunen/eslint-import-resolver-babel-module.git"
   },
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (https://tommyleunen.com)",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "babel",
     "babel-plugin",
     "module",
+    "resolver",
     "alias",
     "rewrite",
     "resolve",
@@ -26,22 +27,21 @@
   ],
   "dependencies": {
     "find-babel-config": "^1.0.0",
-    "object-assign": "^4.0.1",
     "resolve": "^1.1.7"
   },
   "devDependencies": {
-    "babel-plugin-module-alias": "^1.6.0",
+    "babel-plugin-module-resolver": "^2.0.0",
     "chai": "^3.5.0",
     "eslint": "^3.3.0",
     "eslint-config-airbnb-base": "^5.0.2",
     "eslint-plugin-import": "^1.13.0",
     "lodash": "^4.15.0",
     "mocha": "^3.0.2",
-    "nyc": "^8.0.0",
+    "nyc": "^8.1.0",
     "standard-version": "^2.4.0"
   },
   "peerDependencies": {
-    "babel-plugin-module-alias": "1.x"
+    "babel-plugin-module-resolver": "2.x"
   },
   "scripts": {
     "lint": "eslint src test",

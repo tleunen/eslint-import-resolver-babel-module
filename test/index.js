@@ -10,11 +10,18 @@ const expect = require('chai').expect;
 const path = require('path');
 const resolverPlugin = require('../src/index');
 
+const savedWorkingDirectory = process.cwd();
+
 const opts = {
 };
 const extensionOpts = { extensions: ['.js', '.jsx'] };
 
-describe('eslint-import-resolver-module-alias', () => {
+describe.only('eslint-import-resolver-module-resolver', () => {
+    beforeEach(() => {
+        // reset the working directory because the script updates it
+        process.chdir(savedWorkingDirectory);
+    });
+
     it('should export the interfaceVersion', () => {
         expect(resolverPlugin)
             .to.have.property('interfaceVersion')
