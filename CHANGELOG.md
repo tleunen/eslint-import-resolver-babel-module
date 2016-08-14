@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v1.5.1...v2.0.0) (2016-08-14)
+
+
+### Features
+
+* Support for new version of babel-plugin-module-resolver v2 ([f2fc1f3](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/f2fc1f3))
+
+
+### BREAKING CHANGES
+
+* This removes the support for babel-plugin-module-alias v1
+
+
+
 <a name="1.5.1"></a>
 ## [1.5.1](https://github.com/tleunen/eslint-import-resolver-babel-module-alias/compare/v1.5.0...v1.5.1) (2016-08-09)
 
