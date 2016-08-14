@@ -37,7 +37,7 @@
     "eslint-plugin-import": "^1.13.0",
     "lodash": "^4.15.0",
     "mocha": "^3.0.2",
-    "nyc": "^7.1.0",
+    "nyc": "^8.0.0",
     "standard-version": "^2.4.0"
   },
   "peerDependencies": {
