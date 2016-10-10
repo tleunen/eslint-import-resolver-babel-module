@@ -10,18 +10,10 @@ const expect = require('chai').expect;
 const path = require('path');
 const resolverPlugin = require('../src/index');
 
-const savedWorkingDirectory = process.cwd();
-
-const opts = {
-};
+const opts = {};
 const extensionOpts = { extensions: ['.js', '.jsx'] };
 
-describe.only('eslint-import-resolver-module-resolver', () => {
-    beforeEach(() => {
-        // reset the working directory because the script updates it
-        process.chdir(savedWorkingDirectory);
-    });
-
+describe('eslint-import-resolver-module-resolver', () => {
     it('should export the interfaceVersion', () => {
         expect(resolverPlugin)
             .to.have.property('interfaceVersion')
@@ -38,7 +30,7 @@ describe.only('eslint-import-resolver-module-resolver', () => {
     });
 
     it('should return `true` when mapped to a file', () => {
-        expect(resolverPlugin.resolve('components/c1', path.resolve('./test/examples/components/subcomponent/sub/c2'), opts))
+        expect(resolverPlugin.resolve('components/c1', path.resolve('./test/examples/components/sub/sub/c2.js'), opts))
             .to.eql({
                 found: true,
                 path: path.resolve(__dirname, './examples/components/c1.js')
