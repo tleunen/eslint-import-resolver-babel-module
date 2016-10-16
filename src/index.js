@@ -22,7 +22,7 @@ function getPluginOpts(config) {
                 if (pluginConfig) {
                     return {
                         root: [].concat(pluginConfig[1].root, envPluginConfig[1].root),
-                        alias: Object.assign({}, pluginConfig[1].alias, envPluginConfig[1].alias)
+                        alias: Object.assign({}, pluginConfig[1].alias, envPluginConfig[1].alias),
                     };
                 }
                 return envPluginConfig[1];

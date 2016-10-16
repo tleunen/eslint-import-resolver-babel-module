@@ -33,14 +33,13 @@
     "resolve": "^1.1.7"
   },
   "devDependencies": {
+    "babel-jest": "^16.0.0",
     "babel-plugin-module-resolver": "^3.0.0-beta.1",
-    "chai": "^3.5.0",
     "eslint": "^3.3.0",
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-plugin-import": "^1.16.0",
+    "jest": "^16.0.1",
     "lodash": "^4.15.0",
-    "mocha": "^3.0.2",
-    "nyc": "^8.1.0",
     "standard-version": "^3.0.0"
   },
   "peerDependencies": {
@@ -49,15 +48,15 @@
   "scripts": {
     "lint": "eslint src test",
     "pretest": "npm run lint",
-    "test": "nyc mocha",
-    "test:suite": "mocha",
-    "test:watch": "mocha -w",
+    "test": "jest --coverage",
+    "test:suite": "jest",
+    "test:watch": "jest --watch",
     "release": "standard-version"
   },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text"
+  "jest": {
+    "testRegex": "/test/.*\\.test\\.js$",
+    "collectCoverageFrom": [
+      "src/**/*.js"
     ]
   }
 }
