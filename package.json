@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/tleunen/eslint-import-resolver-babel-module.git"
   },
+  "files": [
+    "src"
+  ],
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (https://tommyleunen.com)",
   "license": "MIT",
   "keywords": [
