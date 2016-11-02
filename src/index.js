@@ -3,41 +3,11 @@
 const path = require('path');
 const resolve = require('resolve');
 const mapModule = require('babel-plugin-module-resolver').mapModule;
-const findBabelConfig = require('find-babel-config'); // eslint-disable-line
-
-function findModuleAliasConfig(conf) {
-    if (conf.plugins) {
-        return conf.plugins.find(p => p[0] === 'module-resolver' || p[0] === 'babel-plugin-module-resolver');
-    }
-    return null;
-}
-
-function getPluginOpts(config) {
-    const env = process.env.BABEL_ENV || process.env.NODE_ENV || 'development';
-
-    if (config) {
-        const pluginConfig = findModuleAliasConfig(config);
-
-        if (config.env && config.env[env]) {
-            const envPluginConfig = findModuleAliasConfig(config.env[env]);
-            if (envPluginConfig) {
-                if (pluginConfig) {
-                    return {
-                        root: [].concat(pluginConfig[1].root, envPluginConfig[1].root),
-                        alias: Object.assign({}, pluginConfig[1].alias, envPluginConfig[1].alias),
-                    };
-                }
-                return envPluginConfig[1];
-            }
-        }
-
-        if (pluginConfig) {
-            return pluginConfig[1];
-        }
-    }
-
-    return {};
-}
+const targetPlugin = require('babel-plugin-module-resolver').default;
+const OptionManager =
+    require('babel-core/lib/transformation/file/options/option-manager');
+const buildConfigChain =
+    require('babel-core/lib/transformation/file/options/build-config-chain');
 
 function opts(file, config) {
     return Object.assign(
@@ -61,20 +31,28 @@ exports.interfaceVersion = 2;
 exports.resolve = (source, file, options) => {
     if (resolve.isCore(source)) return { found: true, path: null };
 
-    const babelConfig = findBabelConfig.sync(path.dirname(file));
-    const babelrcPath = babelConfig.file;
-    const config = babelConfig.config;
-    let cwd = babelrcPath
-        ? path.dirname(babelrcPath)
-        : process.cwd();
-
     try {
-        const pluginOpts = getPluginOpts(config);
-        if (pluginOpts.cwd !== 'babelrc') {
-            cwd = pluginOpts.cwd || cwd;
-        }
-
-        const src = mapModule(source, file, pluginOpts, cwd) || source;
+        const manager = new OptionManager();
+        const babelOptions = {
+            babelrc: true,
+            filename: file,
+        };
+        const configs = buildConfigChain(babelOptions);
+        configs.forEach(x => manager.mergeOptions(x));
+        manager.normaliseOptions(babelOptions);
+        const cwd = configs.length > 0 ? configs[0].dirname : process.cwd();
+        const instances = manager.options.plugins.filter((plugin) => {
+            const plug = OptionManager.memoisedPlugins.find(item =>
+                item.plugin === plugin[0]
+            );
+            return plug && plug.container === targetPlugin;
+        });
+        const pluginOpts = instances.reduce((config, plugin) => ({
+            cwd: plugin.cwd || config.cwd,
+            root: config.root.concat(plugin[1] ? plugin[1].root : []),
+            alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
+        }), { root: [], alias: {}, cwd });
+        const src = mapModule(source, file, pluginOpts, pluginOpts.cwd) || source;
         return {
             found: true,
             path: resolve.sync(src, opts(file, options)),
