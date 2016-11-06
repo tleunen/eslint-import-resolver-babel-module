@@ -62,12 +62,16 @@ exports.resolve = (source, file, options) => {
     const babelConfig = findBabelConfig.sync(path.dirname(file));
     const babelrcPath = babelConfig.file;
     const config = babelConfig.config;
-    const cwd = babelrcPath
+    let cwd = babelrcPath
         ? path.dirname(babelrcPath)
         : process.cwd();
 
     try {
         const pluginOpts = getPluginOpts(config);
+        if (pluginOpts.cwd !== 'babelrc') {
+            cwd = pluginOpts.cwd || cwd;
+        }
+
         const src = mapModule(source, file, pluginOpts, cwd) || source;
         return {
             found: true,
