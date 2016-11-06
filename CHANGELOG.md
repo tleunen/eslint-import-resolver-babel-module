@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v3.0.0-beta.1...v2.1.0) (2016-11-06)
+
+
+### Features
+
+* Add support for the custom cwd option from babel-resolver ([0a0d42c](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/0a0d42c))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v2.0.0...v2.0.1) (2016-08-14)
 
