@@ -6,8 +6,6 @@ const mapModule = require('babel-plugin-module-resolver').mapModule;
 const targetPlugin = require('babel-plugin-module-resolver').default;
 const OptionManager =
     require('babel-core/lib/transformation/file/options/option-manager');
-const buildConfigChain =
-    require('babel-core/lib/transformation/file/options/build-config-chain');
 
 function opts(file, config) {
     return Object.assign(
@@ -33,25 +31,22 @@ exports.resolve = (source, file, options) => {
 
     try {
         const manager = new OptionManager();
-        const babelOptions = {
+        const result = manager.init({
             babelrc: true,
             filename: file,
-        };
-        const configs = buildConfigChain(babelOptions);
-        configs.forEach(x => manager.mergeOptions(x));
-        manager.normaliseOptions(babelOptions);
-        const cwd = configs.length > 0 ? configs[0].dirname : process.cwd();
-        const instances = manager.options.plugins.filter((plugin) => {
+        });
+        const instances = result.plugins.filter((plugin) => {
             const plug = OptionManager.memoisedPlugins.find(item =>
                 item.plugin === plugin[0]
             );
             return plug && plug.container === targetPlugin;
         });
         const pluginOpts = instances.reduce((config, plugin) => ({
-            cwd: plugin.cwd || config.cwd,
-            root: config.root.concat(plugin[1] ? plugin[1].root : []),
+            cwd: plugin[1] && plugin[1].cwd ? plugin[1].cwd : config.cwd,
+            root: config.root.concat(plugin[1] && plugin[1].root ? plugin[1].root : []),
             alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
-        }), { root: [], alias: {}, cwd });
+        }), { root: [], alias: {}, cwd: process.cwd() });
+        pluginOpts.cwd = path.resolve(pluginOpts.cwd);
         const src = mapModule(source, file, pluginOpts, pluginOpts.cwd) || source;
         return {
             found: true,

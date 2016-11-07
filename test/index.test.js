@@ -109,7 +109,7 @@ describe('eslint-import-resolver-module-resolver', () => {
             });
         });
 
-        describe('when ony specific env is available', () => {
+        describe.only('when ony specific env is available', () => {
             it('should return `false` when the mapping doesn\'t exist in "env"', () => {
                 const oldEnv = process.env.NODE_ENV;
                 process.env.NODE_ENV = 'development';
