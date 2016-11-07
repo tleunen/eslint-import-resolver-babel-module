@@ -3,7 +3,11 @@ root: true
 extends:
   - "airbnb-base"
 
+parserOptions:
+  sourceType: 'script'
+
 rules:
+  strict: ['error', 'global']
   indent: ['error', 4, { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 }]
   max-len: ['error', 120, 4, {
     ignoreUrls: true,

@@ -1,4 +1,7 @@
 /* eslint-env jest */
+
+'use strict';
+
 const path = require('path');
 const resolverPlugin = require('../src/index');
 

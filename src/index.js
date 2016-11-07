@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const resolve = require('resolve');
 const mapModule = require('babel-plugin-module-resolver').mapModule;
