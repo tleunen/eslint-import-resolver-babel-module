@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v2.1.0...v2.1.1) (2016-11-07)
+
+
+### Bug Fixes
+
+* Fix usage of let ([a925e3f](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/a925e3f))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v3.0.0-beta.1...v2.1.0) (2016-11-06)
 
