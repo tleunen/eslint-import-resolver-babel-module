@@ -17,6 +17,24 @@ function opts(file, config) {
 
 exports.interfaceVersion = 2;
 
+function getPlugins(file) {
+    try {
+        const manager = new OptionManager();
+        const result = manager.init({
+            babelrc: true,
+            filename: file,
+        });
+        return result.plugins;
+    } catch (err) {
+        // This error should only occur if something goes wrong with babel's
+        // internals. Dump it to console so people know what's going on,
+        // elsewise the error will simply be squelched in the calling code.
+        console.error('[eslint-import-resolver-babel-module]', err);
+        console.error('See: https://github.com/tleunen/eslint-import-resolver-babel-module/pull/28');
+        return [];
+    }
+}
+
 /**
  * Find the full path to 'source', given 'file' as a full reference path.
  *
@@ -30,12 +48,7 @@ exports.resolve = (source, file, options) => {
     if (resolve.isCore(source)) return { found: true, path: null };
 
     try {
-        const manager = new OptionManager();
-        const result = manager.init({
-            babelrc: true,
-            filename: file,
-        });
-        const instances = result.plugins.filter((plugin) => {
+        const instances = getPlugins(file).filter((plugin) => {
             const plug = OptionManager.memoisedPlugins.find(item =>
                 item.plugin === plugin[0]
             );
