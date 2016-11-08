@@ -4,7 +4,7 @@
 
 const path = require('path');
 const resolverPlugin = require('../src/index');
-const OptionManager = require('babel-core/lib/transformation/file/options/option-manager');
+const OptionManager = require('babel-core').OptionManager;
 
 const opts = {};
 const extensionOpts = { extensions: ['.js', '.jsx'] };

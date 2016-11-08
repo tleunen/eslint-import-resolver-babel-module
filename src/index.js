@@ -16,8 +16,8 @@ function opts(file, config) {
 exports.interfaceVersion = 2;
 
 function getPlugins(file, target) {
-    const OptionManager = require('babel-core/lib/transformation/file/options/option-manager'); // eslint-disable-line
     try {
+        const OptionManager = require('babel-core').OptionManager; // eslint-disable-line
         const manager = new OptionManager();
         const result = manager.init({
             babelrc: true,
