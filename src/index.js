@@ -4,6 +4,7 @@ const path = require('path');
 const resolve = require('resolve');
 const mapModule = require('babel-plugin-module-resolver').mapModule;
 const targetPlugin = require('babel-plugin-module-resolver').default;
+const OptionManager = require('babel-core').OptionManager;
 
 function opts(file, config) {
     return Object.assign(
@@ -17,7 +18,6 @@ exports.interfaceVersion = 2;
 
 function getPlugins(file, target) {
     try {
-        const OptionManager = require('babel-core').OptionManager; // eslint-disable-line
         const manager = new OptionManager();
         const result = manager.init({
             babelrc: true,
