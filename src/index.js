@@ -4,8 +4,6 @@ const path = require('path');
 const resolve = require('resolve');
 const mapModule = require('babel-plugin-module-resolver').mapModule;
 const targetPlugin = require('babel-plugin-module-resolver').default;
-const OptionManager =
-    require('babel-core/lib/transformation/file/options/option-manager');
 
 function opts(file, config) {
     return Object.assign(
@@ -17,14 +15,20 @@ function opts(file, config) {
 
 exports.interfaceVersion = 2;
 
-function getPlugins(file) {
+function getPlugins(file, target) {
+    const OptionManager = require('babel-core/lib/transformation/file/options/option-manager'); // eslint-disable-line
     try {
         const manager = new OptionManager();
         const result = manager.init({
             babelrc: true,
             filename: file,
         });
-        return result.plugins;
+        return result.plugins.filter((plugin) => {
+            const plug = OptionManager.memoisedPlugins.find(item =>
+                item.plugin === plugin[0]
+            );
+            return plug && plug.container === target;
+        });
     } catch (err) {
         // This error should only occur if something goes wrong with babel's
         // internals. Dump it to console so people know what's going on,
@@ -48,12 +52,7 @@ exports.resolve = (source, file, options) => {
     if (resolve.isCore(source)) return { found: true, path: null };
 
     try {
-        const instances = getPlugins(file).filter((plugin) => {
-            const plug = OptionManager.memoisedPlugins.find(item =>
-                item.plugin === plugin[0]
-            );
-            return plug && plug.container === targetPlugin;
-        });
+        const instances = getPlugins(file, targetPlugin);
         const pluginOpts = instances.reduce((config, plugin) => ({
             cwd: plugin[1] && plugin[1].cwd ? plugin[1].cwd : config.cwd,
             root: config.root.concat(plugin[1] && plugin[1].root ? plugin[1].root : []),
