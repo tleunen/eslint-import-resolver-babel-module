@@ -29,10 +29,10 @@
     "import"
   ],
   "dependencies": {
-    "find-babel-config": "^1.0.0",
     "resolve": "^1.1.7"
   },
   "devDependencies": {
+    "babel-core": "^6.0.0",
     "babel-jest": "^16.0.0",
     "babel-plugin-module-resolver": "^2.3.0",
     "eslint": "^3.3.0",
@@ -43,6 +43,7 @@
     "standard-version": "^3.0.0"
   },
   "peerDependencies": {
+    "babel-core": "^6.0.0",
     "babel-plugin-module-resolver": "^2.3.0"
   },
   "scripts": {

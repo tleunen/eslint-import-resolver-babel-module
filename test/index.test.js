@@ -4,6 +4,7 @@
 
 const path = require('path');
 const resolverPlugin = require('../src/index');
+const OptionManager = require('babel-core').OptionManager;
 
 const opts = {};
 const extensionOpts = { extensions: ['.js', '.jsx'] };
@@ -132,6 +133,25 @@ describe('eslint-import-resolver-module-resolver', () => {
 
                 process.env.NODE_ENV = oldEnv;
             });
+        });
+    });
+
+    describe('babel internals', () => {
+        let oldInit;
+
+        beforeEach(() => {
+            oldInit = OptionManager.prototype.init;
+        });
+        afterEach(() => {
+            OptionManager.prototype.init = oldInit;
+        });
+
+        it('should survive babel blowing up', () => {
+            OptionManager.prototype.init = () => { throw new TypeError(); };
+            expect(resolverPlugin.resolve('underscore', path.resolve('./test/examples/file1'), opts))
+                .toEqual({
+                    found: false,
+                });
         });
     });
 });
