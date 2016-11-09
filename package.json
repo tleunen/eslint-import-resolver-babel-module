@@ -1,6 +1,6 @@
 {
   "name": "eslint-import-resolver-babel-module",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "main": "src/index.js",
   "description": "babel-plugin-module-resolver resolver for eslint-plugin-import",
   "repository": {

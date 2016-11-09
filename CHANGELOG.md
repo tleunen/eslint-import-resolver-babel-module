@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v2.1.1...v2.2.0) (2016-11-09)
+
+
+### Features
+
+* Add support for having the babel plugin configured in a preset ([#28](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/28)) ([952863e](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/952863e))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v2.1.0...v2.1.1) (2016-11-07)
 
