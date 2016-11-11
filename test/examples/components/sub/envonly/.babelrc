@@ -3,7 +3,6 @@
     "test": {
       "plugins": [
         ["module-resolver", {
-          "cwd": "./test/examples/components/sub/envonly",
           "alias": {
             "subsub": "../sub"
           }
