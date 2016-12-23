@@ -43,7 +43,7 @@ function opts(file, config) {
     return Object.assign(
         {},
         config,
-        { basedir: path.dirname(file) }
+        { basedir: path.dirname(file) },
     );
 }
 
