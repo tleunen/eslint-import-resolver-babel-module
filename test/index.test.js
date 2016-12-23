@@ -3,6 +3,7 @@
 'use strict';
 
 const path = require('path');
+const OptionManager = require('babel-core').OptionManager;
 const resolverPlugin = require('../src/index');
 
 const opts = {};
@@ -132,6 +133,33 @@ describe('eslint-import-resolver-module-resolver', () => {
 
                 process.env.NODE_ENV = oldEnv;
             });
+        });
+    });
+
+    describe('babel internals', () => {
+        let oldInit;
+        let error;
+
+        beforeEach(() => {
+            oldInit = OptionManager.prototype.init;
+            error = console.error;
+        });
+        afterEach(() => {
+            OptionManager.prototype.init = oldInit;
+            console.error = error;
+        });
+
+        it('should survive babel blowing up', () => {
+            console.error = jest.fn();
+
+            OptionManager.prototype.init = undefined;
+
+            expect(resolverPlugin.resolve('underscore', path.resolve('./test/examples/file1'), opts))
+                .toEqual({
+                    found: false,
+                });
+
+            expect(console.error).toBeCalled();
         });
     });
 });

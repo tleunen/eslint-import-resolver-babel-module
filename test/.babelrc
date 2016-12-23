@@ -2,7 +2,7 @@
   "plugins": [
     ["module-resolver", {
       "alias": {
-        "components": "./examples/components",
+        "components": "./test/examples/components",
         "underscore": "npm:lodash"
       }
     }]
@@ -12,7 +12,7 @@
       "plugins": [
         ["babel-plugin-module-resolver", {
           "alias": {
-            "subsub": "./examples/components/sub/sub"
+            "subsub": "./test/examples/components/sub/sub"
           }
         }]
       ]
