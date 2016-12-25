@@ -2,3 +2,6 @@ root: true
 
 extends:
   - "tleunen"
+
+parserOptions:
+  sourceType: 'script'
