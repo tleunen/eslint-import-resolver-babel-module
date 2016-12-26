@@ -1,14 +1,14 @@
 {
   "name": "eslint-import-resolver-babel-module",
   "version": "2.2.1",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "description": "babel-plugin-module-resolver resolver for eslint-plugin-import",
   "repository": {
     "type": "git",
     "url": "https://github.com/tleunen/eslint-import-resolver-babel-module.git"
   },
   "files": [
-    "src"
+    "lib"
   ],
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (https://tommyleunen.com)",
   "license": "MIT",
@@ -29,11 +29,15 @@
     "import"
   ],
   "dependencies": {
-    "find-babel-config": "^1.0.1",
+    "pkg-up": "^1.0.0",
     "resolve": "^1.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-jest": "^18.0.0",
     "babel-plugin-module-resolver": "^2.4.0",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
     "eslint": "^3.12.2",
     "eslint-config-tleunen": "^1.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -42,14 +46,17 @@
     "standard-version": "^4.0.0"
   },
   "peerDependencies": {
+    "babel-core": "^6.0.0",
     "babel-plugin-module-resolver": "^2.4.0"
   },
   "scripts": {
     "lint": "eslint src test",
+    "compile": "babel src --out-dir lib",
     "pretest": "npm run lint",
     "test": "jest --coverage",
     "test:suite": "jest",
     "test:watch": "jest --watch",
+    "prepublish": "npm run compile",
     "release": "standard-version"
   },
   "jest": {
