@@ -1,4 +1,7 @@
 /* eslint-env jest */
+/* eslint-disable strict */
+
+'use strict';
 
 const path = require('path');
 const OptionManager = require('babel-core').OptionManager;
