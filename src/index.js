@@ -2,7 +2,7 @@ const path = require('path');
 const resolve = require('resolve');
 const pkgUp = require('pkg-up');
 const targetPlugin = require('babel-plugin-module-resolver').default;
-const mapModule = require('babel-plugin-module-resolver').mapModule;
+const babelModuleResolver = require('babel-plugin-module-resolver');
 const OptionManager = require('babel-core').OptionManager;
 
 function getPlugins(file, target) {
@@ -62,10 +62,13 @@ exports.resolve = (source, file, options) => {
       alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
     }), { root: [], alias: {}, cwd: projectRootDir });
 
-    const src = mapModule(source, file, pluginOpts, path.resolve(pluginOpts.cwd)) || source;
+    const manipulatedOpts = babelModuleResolver.manipulatePluginOptions(pluginOpts);
+    const src = babelModuleResolver.mapModule(
+      source, file, manipulatedOpts, path.resolve(manipulatedOpts.cwd),
+    );
     return {
       found: true,
-      path: resolve.sync(src, opts(file, options)),
+      path: resolve.sync(src || source, opts(file, options)),
     };
   } catch (e) {
     return { found: false };
