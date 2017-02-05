@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v2.2.1...v3.0.0) (2017-02-05)
+
+
+### Bug Fixes
+
+* Fix support for custom extensions from babel ([#39](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/39)) ([fa885e8](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/fa885e8))
+
+
+### Features
+
+* Use babel's built-in option manager for loading configs ([#34](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/34)) ([c526927](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/c526927))
+
+
+### Fix
+
+* Fix linting when using a root glob config ([#38](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/38)) ([45a78be](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/45a78be))
+
+
+### BREAKING CHANGES
+
+* Now requires babel-plugin-module-resolver >= 2.5.0
+* The root config and alias must be relative to the project root, not relative to the babelrc file.
+
+
+
 <a name="2.2.1"></a>
 ## [2.2.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v2.2.0...v2.2.1) (2016-11-11)
 
