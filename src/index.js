@@ -30,13 +30,6 @@ function getPlugins(file, target) {
   }
 }
 
-function opts(file, config) {
-  return {
-    ...config,
-    basedir: path.dirname(file),
-  };
-}
-
 exports.interfaceVersion = 2;
 
 /**
@@ -60,15 +53,29 @@ exports.resolve = (source, file, options) => {
       cwd: plugin[1] && plugin[1].cwd ? plugin[1].cwd : config.cwd,
       root: config.root.concat(plugin[1] && plugin[1].root ? plugin[1].root : []),
       alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
+      extensions: plugin[1] && plugin[1].extensions ? plugin[1].extensions : config.extensions,
     }), { root: [], alias: {}, cwd: projectRootDir });
 
     const manipulatedOpts = babelModuleResolver.manipulatePluginOptions(pluginOpts);
+
     const src = babelModuleResolver.mapModule(
       source, file, manipulatedOpts, path.resolve(manipulatedOpts.cwd),
     );
+
+    const extensions = options.extensions ||
+      manipulatedOpts.extensions ||
+      babelModuleResolver.defaultExtensions;
+
     return {
       found: true,
-      path: resolve.sync(src || source, opts(file, options)),
+      path: resolve.sync(
+        src || source,
+        {
+          ...options,
+          extensions,
+          basedir: path.dirname(file),
+        },
+      ),
     };
   } catch (e) {
     return { found: false };

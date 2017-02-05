@@ -40,6 +40,14 @@ describe('eslint-import-resolver-module-resolver', () => {
       });
   });
 
+  it('should return `true` when the file uses a custom extension from the babel plugin', () => {
+    expect(resolverPlugin.resolve('components/customFile', path.resolve('./test/examples/components/c1.js'), opts))
+      .toEqual({
+        found: true,
+        path: path.resolve(__dirname, './examples/components/customFile.customExt'),
+      });
+  });
+
   it('should return `true` when no mapping is required', () => {
     expect(resolverPlugin.resolve('./sub/sub/c2', path.resolve('./test/examples/components/c1'), opts))
       .toEqual({
