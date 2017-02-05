@@ -32,6 +32,14 @@ describe('eslint-import-resolver-module-resolver', () => {
       });
   });
 
+  it('should return `true` when the file is mapped through a glob root config', () => {
+    expect(resolverPlugin.resolve('c2', path.resolve('./test/examples/components/c1.js'), opts))
+      .toEqual({
+        found: true,
+        path: path.resolve(__dirname, './examples/components/sub/sub/c2.js'),
+      });
+  });
+
   it('should return `true` when no mapping is required', () => {
     expect(resolverPlugin.resolve('./sub/sub/c2', path.resolve('./test/examples/components/c1'), opts))
       .toEqual({
@@ -111,7 +119,7 @@ describe('eslint-import-resolver-module-resolver', () => {
       });
     });
 
-    describe('when ony specific env is available', () => {
+    describe('when a specific env is available', () => {
       it('should return `false` when the mapping doesn\'t exist in "env"', () => {
         const oldEnv = process.env.NODE_ENV;
         process.env.NODE_ENV = 'development';

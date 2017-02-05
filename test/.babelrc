@@ -1,6 +1,7 @@
 {
   "plugins": [
     ["module-resolver", {
+      "root": ["./test/examples/**"],
       "alias": {
         "components": "./test/examples/components",
         "underscore": "npm:lodash"
