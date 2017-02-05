@@ -5,7 +5,8 @@
       "alias": {
         "components": "./test/examples/components",
         "underscore": "npm:lodash"
-      }
+      },
+      "extensions": [".js", ".customExt"]
     }]
   ],
   "env": {
