@@ -1,7 +1,4 @@
 root: true
 
 extends:
-  - "tleunen"
-
-parserOptions:
-  sourceType: 'script'
+  - "airbnb-base"
