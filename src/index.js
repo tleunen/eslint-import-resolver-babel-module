@@ -50,7 +50,7 @@ exports.resolve = (source, file, options) => {
     const instances = getPlugins(file, targetPlugin);
 
     const pluginOpts = instances.reduce((config, plugin) => ({
-      cwd: plugin[1] && plugin[1].cwd ? plugin[1].cwd : config.cwd,
+      cwd: plugin[1] && plugin[1].cwd && plugin[1].cwd !== 'babelrc' ? plugin[1].cwd : config.cwd,
       root: config.root.concat(plugin[1] && plugin[1].root ? plugin[1].root : []),
       alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
       extensions: plugin[1] && plugin[1].extensions ? plugin[1].extensions : config.extensions,
