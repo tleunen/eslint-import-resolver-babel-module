@@ -41,7 +41,7 @@ exports.interfaceVersion = 2;
  * @param  {object} options - the resolver options
  * @return {object}
  */
-exports.resolve = (source, file, options) => {
+exports.resolve = (source, file, options = {}) => {
   if (resolve.isCore(source)) return { found: true, path: null };
 
   const projectRootDir = path.dirname(pkgUp.sync(file));
