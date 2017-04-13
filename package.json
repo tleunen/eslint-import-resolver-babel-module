@@ -56,7 +56,8 @@
     "test": "jest --coverage",
     "test:suite": "jest",
     "test:watch": "jest --watch",
-    "prepublish": "npm run compile",
+    "prepare": "npm run compile",
+    "preinstall": "npm run compile",
     "release": "standard-version"
   },
   "jest": {
