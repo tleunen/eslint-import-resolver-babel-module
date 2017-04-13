@@ -41,8 +41,8 @@ exports.interfaceVersion = 2;
  * @param  {object} options - the resolver options
  * @return {object}
  */
-exports.resolve = (source, file, opts) => {
-  const options = opts || {};
+exports.resolve = (source, file, opts = {}) => {
+  const options = opts;
   if (resolve.isCore(source)) return { found: true, path: null };
 
   const projectRootDir = path.dirname(pkgUp.sync(file));
@@ -55,7 +55,21 @@ exports.resolve = (source, file, opts) => {
       root: config.root.concat(plugin[1] && plugin[1].root ? plugin[1].root : []),
       alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
       extensions: plugin[1] && plugin[1].extensions ? plugin[1].extensions : config.extensions,
-    }), { root: [], alias: {}, cwd: projectRootDir });
+    }), {
+      // if .babelrc doesn't exist, try to get the configuration information from the `opts`,
+      // which gets defined by the eslint configuration file.
+      // e.g. in .eslintrc file
+      // "import/resolver": {
+      //   "babel-module": {
+      //     "root": ["./src"],
+      //     "extensions": [".js", ".jsx"]
+      //   }
+      // }
+      cwd: options.cwd || projectRootDir,
+      root: options.root || [],
+      alias: options.alias || {},
+      extensions: options.extensions || ['.js'], // .js is the default option
+    });
 
     const manipulatedOpts = babelModuleResolver.manipulatePluginOptions(pluginOpts);
 
