@@ -17,10 +17,10 @@ describe('eslint-import-resolver-module-resolver', () => {
   });
 
   it('should return `true` when mapped to a npm module', () => {
-    expect(resolverPlugin.resolve('underscore', path.resolve('./test/examples/file1'), opts))
+    expect(resolverPlugin.resolve('old-bcore', path.resolve('./test/examples/file1'), opts))
       .toEqual({
         found: true,
-        path: path.resolve(__dirname, '../node_modules/lodash/lodash.js'),
+        path: path.resolve(__dirname, '../node_modules/babel-core/index.js'),
       });
   });
 

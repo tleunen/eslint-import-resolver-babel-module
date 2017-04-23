@@ -4,7 +4,7 @@
       "root": ["./test/examples/**"],
       "alias": {
         "components": "./test/examples/components",
-        "underscore": "npm:lodash"
+        "old-bcore": "babel-core"
       },
       "extensions": [".js", ".customExt"]
     }]
