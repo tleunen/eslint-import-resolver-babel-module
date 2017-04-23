@@ -1,4 +1,13 @@
 {
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": 4
+      },
+      "loose": true,
+      "useBuiltIns": true
+    }]
+  ],
   "plugins": [
     ["transform-object-rest-spread", { "useBuiltIns": true }]
   ]

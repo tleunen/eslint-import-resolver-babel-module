@@ -2,7 +2,8 @@ const path = require('path');
 const resolve = require('resolve');
 const pkgUp = require('pkg-up');
 const targetPlugin = require('babel-plugin-module-resolver').default;
-const babelModuleResolver = require('babel-plugin-module-resolver');
+const normalizeOptions = require('babel-plugin-module-resolver/lib/normalizeOptions').default;
+const getRealPath = require('babel-plugin-module-resolver/lib/getRealPath').default;
 const OptionManager = require('babel-core').OptionManager;
 
 function getPlugins(file, target) {
@@ -57,15 +58,20 @@ exports.resolve = (source, file, opts) => {
       extensions: plugin[1] && plugin[1].extensions ? plugin[1].extensions : config.extensions,
     }), { root: [], alias: {}, cwd: projectRootDir });
 
-    const manipulatedOpts = babelModuleResolver.manipulatePluginOptions(pluginOpts);
 
-    const src = babelModuleResolver.mapModule(
-      source, file, manipulatedOpts, path.resolve(manipulatedOpts.cwd),
-    );
+    normalizeOptions(pluginOpts, file);
 
-    const extensions = options.extensions ||
-      manipulatedOpts.extensions ||
-      babelModuleResolver.defaultExtensions;
+    const babelState = {
+      file: {
+        opts: {
+          filename: file,
+        },
+      },
+      opts: pluginOpts,
+    };
+    const src = getRealPath(source, babelState);
+
+    const extensions = options.extensions || pluginOpts.extensions;
 
     return {
       found: true,
