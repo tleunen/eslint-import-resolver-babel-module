@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0-beta.0"></a>
+# [4.0.0-beta.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v3.0.0...v4.0.0-beta.0) (2017-04-23)
+
+
+### Bug Fixes
+
+* Fix build ([91029b8](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/91029b8))
+* Fix lib to support babel plugin v3 ([#54](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/54)) ([731ab8c](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/731ab8c))
+* Prevents `options.extensions` from failing when `options` is `null` ([#47](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/47)) ([5d297a7](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/5d297a7))
+
+
+### BREAKING CHANGES
+
+* Not compatible with babel-plugin-module-resolver v2.x
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v2.2.1...v3.0.0) (2017-02-05)
 
