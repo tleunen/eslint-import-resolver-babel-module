@@ -80,6 +80,7 @@ exports.resolve = (source, file, opts) => {
           ...options,
           extensions,
           basedir: path.dirname(file),
+          paths: options.paths.map(apath => (`${projectRootDir}/${apath}`)),
         },
       ),
     };
