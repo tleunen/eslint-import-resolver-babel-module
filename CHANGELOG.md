@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0-beta.1"></a>
+# [4.0.0-beta.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.0...v4.0.0-beta.1) (2017-04-25)
+
+
+### Bug Fixes
+
+* Fix resolution when using a custom cwd ([#55](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/55)) ([188f338](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/188f338)), closes [#43](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/43)
+* Fix the custom babel cwd in an editor ([#56](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/56)) ([b13ffd9](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/b13ffd9))
+
+
+
 <a name="4.0.0-beta.0"></a>
 # [4.0.0-beta.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v3.0.0...v4.0.0-beta.0) (2017-04-23)
 
