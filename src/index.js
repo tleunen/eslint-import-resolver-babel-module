@@ -67,7 +67,7 @@ exports.resolve = (source, file, opts) => {
       opts: pluginOpts,
     };
 
-    normalizeOptions(pluginOpts, babelState);
+    normalizeOptions(babelState.opts, babelState.file);
     const src = getRealPath(source, babelState);
 
     const extensions = options.extensions || pluginOpts.extensions;
