@@ -73,6 +73,32 @@ describe('eslint-import-resolver-module-resolver', () => {
       .toEqual({ found: true, path: null });
   });
 
+  describe('with webpack paths', () => {
+    it('should support a path with a query', () => {
+      expect(resolverPlugin.resolve('components/c1?q=sth', path.resolve('./test/examples/components/sub/sub/c2.js'), opts))
+        .toEqual({
+          found: true,
+          path: path.resolve(__dirname, './examples/components/c1.js'),
+        });
+    });
+
+    it('should support a path with a loader', () => {
+      expect(resolverPlugin.resolve('my-loader!components/c1', path.resolve('./test/examples/components/sub/sub/c2.js'), opts))
+        .toEqual({
+          found: true,
+          path: path.resolve(__dirname, './examples/components/c1.js'),
+        });
+    });
+
+    it('should support multiple loaders', () => {
+      expect(resolverPlugin.resolve('style-loader!css-loader!less-loader!components/c1', path.resolve('./test/examples/components/sub/sub/c2.js'), opts))
+        .toEqual({
+          found: true,
+          path: path.resolve(__dirname, './examples/components/c1.js'),
+        });
+    });
+  });
+
   describe('with specific file extensions', () => {
     it('should return `false` with a file with an unknown extension', () => {
       expect(resolverPlugin.resolve('./c3', path.resolve('./test/examples/components/c1'), opts))
