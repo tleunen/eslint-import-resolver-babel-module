@@ -48,7 +48,7 @@
   },
   "peerDependencies": {
     "babel-core": "^6.0.0",
-    "babel-plugin-module-resolver": "^2.5.0"
+    "babel-plugin-module-resolver": ">3.0.0-beta"
   },
   "scripts": {
     "lint": "eslint src test",
