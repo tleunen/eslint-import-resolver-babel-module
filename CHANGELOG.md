@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0-beta.2"></a>
+# [4.0.0-beta.2](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2017-05-17)
+
+
+### Features
+
+* Strip the webpack loaders and query string from the source before resolving the file ([#60](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/60)) ([21c37f2](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/21c37f2)), closes [#59](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/59)
+
+
+
 <a name="4.0.0-beta.1"></a>
 # [4.0.0-beta.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.0...v4.0.0-beta.1) (2017-04-25)
 
