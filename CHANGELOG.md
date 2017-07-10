@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0-beta.3"></a>
+# [4.0.0-beta.3](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.2...v4.0.0-beta.3) (2017-07-10)
+
+
+### Bug Fixes
+
+* Use new resolvePath function from module-resolver 3.0.0-beta.4 ([f731792](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/f731792))
+
+
+
 <a name="4.0.0-beta.2"></a>
 # [4.0.0-beta.2](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2017-05-17)
 
