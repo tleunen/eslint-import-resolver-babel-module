@@ -2,8 +2,7 @@ const path = require('path');
 const resolve = require('resolve');
 const pkgUp = require('pkg-up');
 const targetPlugin = require('babel-plugin-module-resolver').default;
-const normalizeOptions = require('babel-plugin-module-resolver/lib/normalizeOptions').default;
-const getRealPath = require('babel-plugin-module-resolver/lib/getRealPath').default;
+const resolvePath = require('babel-plugin-module-resolver').resolvePath;
 const OptionManager = require('babel-core').OptionManager;
 
 function getPlugins(file, target) {
@@ -77,19 +76,8 @@ exports.resolve = (source, file, opts) => {
       { root: [], alias: {}, cwd: projectRootDir },
     );
 
-    const babelState = {
-      file: {
-        opts: {
-          filename: file,
-        },
-      },
-      opts: pluginOpts,
-    };
-
-    normalizeOptions(babelState.opts, babelState.file);
-
     const finalSource = stripWebpack(source);
-    const src = getRealPath(finalSource, babelState);
+    const src = resolvePath(finalSource, file, pluginOpts);
 
     const extensions = options.extensions || pluginOpts.extensions;
 
