@@ -12,12 +12,12 @@ function getPlugins(file, target) {
       babelrc: true,
       filename: file,
     });
-    
+
     // Babel 7.0.0
     if (!OptionManager.memoisedPlugins) {
-      return result.plugins.filter(function (plugin) {
-        var plug = plugin[0] || plugin;
-        return plug.key.indexOf('/babel-plugin-module-resolver/') > -1;
+      return result.plugins.filter((plugin) => {
+        const plug = plugin[0] || plugin;
+        return plug.key.indexOf('babel-plugin-module-resolver') > -1;
       });
     }
 
