@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/tleunen/eslint-import-resolver-babel-module.git"
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "files": [
     "lib"
   ],
