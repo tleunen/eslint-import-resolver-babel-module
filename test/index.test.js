@@ -4,7 +4,7 @@
 'use strict';
 
 const path = require('path');
-const OptionManager = require('babel-core').OptionManager;
+const { OptionManager } = require('babel-core');
 const resolverPlugin = require('../src/index');
 
 const opts = {};
@@ -185,6 +185,7 @@ describe('eslint-import-resolver-module-resolver', () => {
 
     beforeEach(() => {
       oldInit = OptionManager.prototype.init;
+      // eslint-disable-next-line prefer-destructuring
       error = console.error;
     });
     afterEach(() => {
