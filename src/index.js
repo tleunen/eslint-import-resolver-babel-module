@@ -2,8 +2,8 @@ const path = require('path');
 const resolve = require('resolve');
 const pkgUp = require('pkg-up');
 const targetPlugin = require('babel-plugin-module-resolver').default;
-const resolvePath = require('babel-plugin-module-resolver').resolvePath;
-const OptionManager = require('babel-core').OptionManager;
+const { resolvePath } = require('babel-plugin-module-resolver');
+const { OptionManager } = require('babel-core');
 
 function getPlugins(file, target) {
   try {
@@ -82,7 +82,21 @@ exports.resolve = (source, file, opts) => {
         alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
         extensions: plugin[1] && plugin[1].extensions ? plugin[1].extensions : config.extensions,
       }),
-      { root: [], alias: {}, cwd: projectRootDir },
+      {
+        // if .babelrc doesn't exist, try to get the configuration information from `options`,
+        // which gets defined by the eslint configuration file.
+        // e.g. in .eslintrc file
+        // "import/resolver": {
+        //   "babel-module": {
+        //     "root": ["./src"],
+        //     "extensions": [".js", ".jsx"]
+        //   }
+        // }
+        cwd: options.cwd || projectRootDir,
+        root: options.root || [],
+        alias: options.alias || {},
+        extensions: options.extensions || ['.js', '.jsx', '.es', '.es6', '.mjs'],
+      },
     );
 
     const finalSource = stripWebpack(source);
