@@ -1,11 +1,10 @@
 const path = require('path');
 const resolve = require('resolve');
 const pkgUp = require('pkg-up');
-const targetPlugin = require('babel-plugin-module-resolver').default;
 const { resolvePath } = require('babel-plugin-module-resolver');
 const { OptionManager } = require('babel-core');
 
-function getPlugins(file, target) {
+function getPlugins(file) {
   try {
     const manager = new OptionManager();
     const result = manager.init({
@@ -24,8 +23,7 @@ function getPlugins(file, target) {
     // Babel 6.0.0
     return result.plugins.filter((plugin) => {
       const plug = OptionManager.memoisedPlugins.find(item => item.plugin === plugin[0]);
-
-      return plug && plug.container === target;
+      return plug && plug.plugin && plug.plugin.key === 'module-resolver';
     });
   } catch (err) {
     // This error should only occur if something goes wrong with babel's
@@ -73,7 +71,7 @@ exports.resolve = (source, file, opts) => {
   const projectRootDir = path.dirname(pkgUp.sync(file));
 
   try {
-    const instances = getPlugins(file, targetPlugin);
+    const instances = getPlugins(file);
 
     const pluginOpts = instances.reduce(
       (config, plugin) => ({
