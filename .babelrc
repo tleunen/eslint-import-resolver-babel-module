@@ -5,7 +5,7 @@
         "node": 6
       },
       "loose": true,
-      "useBuiltIns": true
+      "useBuiltIns": "usage"
     }]
   ],
   "plugins": [
