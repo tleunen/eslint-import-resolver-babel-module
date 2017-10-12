@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0-beta.5"></a>
+# [4.0.0-beta.5](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2017-10-12)
+
+
+
 <a name="4.0.0-beta.4"></a>
 # [4.0.0-beta.4](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2017-10-12)
 
