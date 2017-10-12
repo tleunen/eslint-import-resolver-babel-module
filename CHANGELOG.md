@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0-beta.4"></a>
+# [4.0.0-beta.4](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2017-10-12)
+
+
+### Features
+
+* Add support for Babel 7.0.0 ([#63](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/63)) ([1ffa7f5](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/1ffa7f5))
+* Allow the resolver options to be set in the eslint file ([#68](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/68)) ([8ee7c08](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/8ee7c08))
+
+
+
 <a name="4.0.0-beta.3"></a>
 # [4.0.0-beta.3](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.2...v4.0.0-beta.3) (2017-07-10)
 
