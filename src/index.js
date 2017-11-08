@@ -16,7 +16,7 @@ function getPlugins(file) {
     if (!OptionManager.memoisedPlugins) {
       return result.plugins.filter((plugin) => {
         const plug = plugin[0] || plugin;
-        return plug.key.indexOf('babel-plugin-module-resolver') > -1;
+        return plug.key === 'module-resolver';
       });
     }
 
