@@ -4,7 +4,7 @@ const pkgUp = require('pkg-up');
 const { resolvePath } = require('babel-plugin-module-resolver');
 const { OptionManager } = require('babel-core');
 
-function getPlugins(file) {
+function getPluginOptions(file) {
   try {
     const manager = new OptionManager();
     const result = manager.init({
@@ -14,17 +14,18 @@ function getPlugins(file) {
 
     // Babel 7.0.0
     if (!OptionManager.memoisedPlugins) {
-      return result.plugins.filter((plugin) => {
-        const plug = plugin[0] || plugin;
-        return plug.key === 'module-resolver';
-      });
+      return result.plugins
+        .filter(plugin => (Array.isArray(plugin) ? plugin[0] : plugin).key === 'module-resolver')
+        .map(plugin => (Array.isArray(plugin) ? plugin[1] : plugin.options) || {});
     }
 
     // Babel 6.0.0
-    return result.plugins.filter((plugin) => {
-      const plug = OptionManager.memoisedPlugins.find(item => item.plugin === plugin[0]);
-      return plug && plug.plugin && plug.plugin.key === 'module-resolver';
-    });
+    return result.plugins
+      .filter(([plugin]) => (
+        plugin.key === 'module-resolver' &&
+        OptionManager.memoisedPlugins.some(item => item.plugin === plugin)
+      ))
+      .map(([, options]) => options || {});
   } catch (err) {
     // This error should only occur if something goes wrong with babel's
     // internals. Dump it to console so people know what's going on,
@@ -71,14 +72,14 @@ exports.resolve = (source, file, opts) => {
   const projectRootDir = path.dirname(pkgUp.sync(file));
 
   try {
-    const instances = getPlugins(file);
+    const pluginOptionsList = getPluginOptions(file);
 
-    const pluginOpts = instances.reduce(
-      (config, plugin) => ({
-        cwd: plugin[1] && plugin[1].cwd ? plugin[1].cwd : config.cwd,
-        root: config.root.concat(plugin[1] && plugin[1].root ? plugin[1].root : []),
-        alias: Object.assign(config.alias, plugin[1] ? plugin[1].alias : {}),
-        extensions: plugin[1] && plugin[1].extensions ? plugin[1].extensions : config.extensions,
+    const pluginOptions = pluginOptionsList.reduce(
+      (config, rawPluginOptions) => ({
+        cwd: rawPluginOptions.cwd || config.cwd,
+        root: config.root.concat(rawPluginOptions.root || []),
+        alias: Object.assign(config.alias, rawPluginOptions.alias),
+        extensions: rawPluginOptions.extensions || config.extensions,
       }),
       {
         // if .babelrc doesn't exist, try to get the configuration information from `options`,
@@ -98,9 +99,9 @@ exports.resolve = (source, file, opts) => {
     );
 
     const finalSource = stripWebpack(source);
-    const src = resolvePath(finalSource, file, pluginOpts);
+    const src = resolvePath(finalSource, file, pluginOptions);
 
-    const extensions = options.extensions || pluginOpts.extensions;
+    const extensions = options.extensions || pluginOptions.extensions;
 
     return {
       found: true,
