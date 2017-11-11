@@ -56,6 +56,8 @@ function stripWebpack(src) {
 
 exports.interfaceVersion = 2;
 
+const defaultExtensions = ['.js', '.jsx', '.es', '.es6', '.mjs'];
+
 /**
  * Find the full path to 'source', given 'file' as a full reference path.
  *
@@ -94,7 +96,7 @@ exports.resolve = (source, file, opts) => {
         cwd: options.cwd || projectRootDir,
         root: options.root || [],
         alias: options.alias || {},
-        extensions: options.extensions || ['.js', '.jsx', '.es', '.es6', '.mjs'],
+        extensions: options.extensions || defaultExtensions,
       },
     );
 
