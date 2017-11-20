@@ -2,38 +2,18 @@ const path = require('path');
 const resolve = require('resolve');
 const pkgUp = require('pkg-up');
 const { resolvePath } = require('babel-plugin-module-resolver');
-const { OptionManager } = require('babel-core');
+const { OptionManager } = require('@babel/core');
 
 function getPluginOptions(file) {
-  try {
-    const manager = new OptionManager();
-    const result = manager.init({
-      babelrc: true,
-      filename: file,
-    });
+  const manager = new OptionManager();
+  const result = manager.init({
+    babelrc: true,
+    filename: file,
+  });
 
-    // Babel 7.0.0
-    if (!OptionManager.memoisedPlugins) {
-      return result.plugins
-        .filter(plugin => (Array.isArray(plugin) ? plugin[0] : plugin).key === 'module-resolver')
-        .map(plugin => (Array.isArray(plugin) ? plugin[1] : plugin.options) || {});
-    }
-
-    // Babel 6.0.0
-    return result.plugins
-      .filter(([plugin]) => (
-        plugin.key === 'module-resolver' &&
-        OptionManager.memoisedPlugins.some(item => item.plugin === plugin)
-      ))
-      .map(([, options]) => options || {});
-  } catch (err) {
-    // This error should only occur if something goes wrong with babel's
-    // internals. Dump it to console so people know what's going on,
-    // elsewise the error will simply be squelched in the calling code.
-    console.error('[eslint-import-resolver-babel-module]', err);
-    console.error('See: https://github.com/tleunen/eslint-import-resolver-babel-module/pull/34');
-    return [];
-  }
+  return result.plugins
+    .filter(plugin => (Array.isArray(plugin) ? plugin[0] : plugin).key === 'module-resolver')
+    .map(plugin => (Array.isArray(plugin) ? plugin[1] : plugin.options) || {});
 }
 
 function stripWebpack(src) {
