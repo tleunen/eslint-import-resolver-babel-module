@@ -36,12 +36,13 @@
     "resolve": "^1.4.0"
   },
   "devDependencies": {
-    "babel-cli": "^7.0.0-beta.2",
-    "babel-core": "^7.0.0-beta.2",
+    "@babel/cli": "^7.0.0-beta.34",
+    "@babel/core": "^7.0.0-beta.34",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.34",
+    "@babel/preset-env": "^7.0.0-beta.34",
+    "babel-core": "^7.0.0-0",
     "babel-jest": "^21.2.0",
-    "babel-plugin-module-resolver": "^3.0.0-beta.0",
-    "babel-plugin-transform-object-rest-spread": "^7.0.0-beta.2",
-    "babel-preset-env": "^2.0.0-beta.2",
+    "babel-plugin-module-resolver": "^3.0.0",
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
@@ -50,19 +51,14 @@
     "standard-version": "^4.2.0"
   },
   "peerDependencies": {
-    "babel-core": "^6.0.0 || >7.0.0-alpha",
-    "babel-plugin-module-resolver": "^3.0.0-beta"
+    "@babel/core": "^7.0.0-0",
+    "babel-plugin-module-resolver": "^3.0.0"
   },
   "scripts": {
     "lint": "eslint src test",
     "compile": "babel src --out-dir lib",
-    "babel:clean": "rimraf node_modules/babel-cli node_modules/babel-core node_modules/babel-plugin-transform-object-rest-spread",
-    "babel:6": "npm run babel:clean && npm i babel-cli@^6 babel-core@^6 babel-plugin-transform-object-rest-spread@^6",
-    "babel:7": "npm run babel:clean && npm i babel-cli@^7.0.0-beta babel-core@^7.0.0-beta babel-plugin-transform-object-rest-spread@^7.0.0-beta",
-    "test:babel:6": "npm run babel:6 && npm run test:suite",
-    "test:babel:7": "npm run babel:7 && npm run test:suite --coverage",
     "pretest": "npm run lint",
-    "test": "npm run test:babel:6 && npm run test:babel:7",
+    "test": "npm run test:suite --coverage",
     "test:suite": "jest",
     "test:watch": "jest --watch",
     "prepare": "npm run compile",
