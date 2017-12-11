@@ -12,15 +12,6 @@ function getPlugins(file) {
       filename: file,
     });
 
-    // Babel 7.0.0
-    if (!OptionManager.memoisedPlugins) {
-      return result.plugins.filter((plugin) => {
-        const plug = plugin[0] || plugin;
-        return plug.key.indexOf('babel-plugin-module-resolver') > -1;
-      });
-    }
-
-    // Babel 6.0.0
     return result.plugins.filter((plugin) => {
       const plug = OptionManager.memoisedPlugins.find(item => item.plugin === plugin[0]);
       return plug && plug.plugin && plug.plugin.key === 'module-resolver';
