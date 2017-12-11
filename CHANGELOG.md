@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.5...v4.0.0) (2017-12-11)
+
+
+### Bug Fixes
+
+* **babel:** Support only babel 6 ([#80](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/80)) ([f01d29d](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/f01d29d))
+
+
+
 <a name="4.0.0-beta.5"></a>
 # [4.0.0-beta.5](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2017-10-12)
 
