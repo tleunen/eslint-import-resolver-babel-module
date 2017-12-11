@@ -4,7 +4,6 @@
 'use strict';
 
 const path = require('path');
-const { OptionManager } = require('babel-core');
 const resolverPlugin = require('../src/index');
 
 const opts = {};
@@ -17,10 +16,10 @@ describe('eslint-import-resolver-module-resolver', () => {
   });
 
   it('should return `true` when mapped to a npm module', () => {
-    expect(resolverPlugin.resolve('old-bcore', path.resolve('./test/examples/file1'), opts))
+    expect(resolverPlugin.resolve('babel-plugin', path.resolve('./test/examples/file1'), opts))
       .toEqual({
         found: true,
-        path: path.resolve(__dirname, '../node_modules/babel-core/index.js'),
+        path: path.resolve(__dirname, '../node_modules/babel-plugin-module-resolver/lib/index.js'),
       });
   });
 
@@ -141,7 +140,7 @@ describe('eslint-import-resolver-module-resolver', () => {
 
       it('should return `true` when the mapping exists in the "env"', () => {
         const oldEnv = process.env.NODE_ENV;
-        process.env.NODE_ENV = 'test';
+        process.env.NODE_ENV = 'testenv';
 
         expect(resolverPlugin.resolve('subsub/c2', path.resolve('./test/examples/components/c1'), opts))
           .toEqual({
@@ -166,7 +165,7 @@ describe('eslint-import-resolver-module-resolver', () => {
 
       it('should return `true` when the mapping exists in the "env"', () => {
         const oldEnv = process.env.NODE_ENV;
-        process.env.NODE_ENV = 'test';
+        process.env.NODE_ENV = 'testenv';
 
         expect(resolverPlugin.resolve('subsub/c2', path.resolve('./test/examples/components/sub/envonly/yo'), opts))
           .toEqual({
@@ -176,34 +175,6 @@ describe('eslint-import-resolver-module-resolver', () => {
 
         process.env.NODE_ENV = oldEnv;
       });
-    });
-  });
-
-  describe('babel internals', () => {
-    let oldInit;
-    let error;
-
-    beforeEach(() => {
-      oldInit = OptionManager.prototype.init;
-      // eslint-disable-next-line prefer-destructuring
-      error = console.error;
-    });
-    afterEach(() => {
-      OptionManager.prototype.init = oldInit;
-      console.error = error;
-    });
-
-    it('should survive babel blowing up', () => {
-      console.error = jest.fn();
-
-      OptionManager.prototype.init = undefined;
-
-      expect(resolverPlugin.resolve('underscore', path.resolve('./test/examples/file1'), opts))
-        .toEqual({
-          found: false,
-        });
-
-      expect(console.error).toBeCalled();
     });
   });
 });

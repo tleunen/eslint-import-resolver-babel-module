@@ -4,13 +4,13 @@
       "root": ["./test/examples/**"],
       "alias": {
         "components": "./test/examples/components",
-        "old-bcore": "babel-core"
+        "babel-plugin": "babel-plugin-module-resolver"
       },
       "extensions": [".js", ".customExt"]
     }]
   ],
   "env": {
-    "test": {
+    "testenv": {
       "plugins": [
         ["babel-plugin-module-resolver", {
           "alias": {
