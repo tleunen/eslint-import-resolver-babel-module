@@ -39,6 +39,7 @@ function getPluginOptions(file, defaultOptions) {
 
 function stripWebpack(src, alias) {
   let source = src;
+  console.log(source);
   const aliases = Object.keys(alias);
   let index = source.length;
   aliases.forEach(((element) => {
@@ -48,16 +49,19 @@ function stripWebpack(src, alias) {
     }
   }));
   // strip loaders
-  const finalBang = source.lastIndexOf('!', index - 1);
-  if (finalBang > 0) {
+  console.log(index);
+  const finalBang = index ? source.lastIndexOf('!', index - 1) : -1;
+  if (finalBang >= 0) {
     source = source.slice(finalBang + 1);
   }
+  console.log(finalBang);
 
   // strip resource query
   const finalQuestionMark = source.lastIndexOf('?');
   if (finalQuestionMark >= 0) {
     source = source.slice(0, finalQuestionMark);
   }
+  console.log(source);
   return source;
 }
 
