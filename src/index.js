@@ -42,8 +42,9 @@ function stripWebpack(src, alias) {
   const aliases = Object.keys(alias);
   let index = source.length;
   aliases.forEach(((element) => {
-    if (source.indexOf(element) >= 0 && source.indexOf(element) < index) {
-      index = source.indexOf(element);
+    const i = source.indexOf(element);
+    if (i >= 0 && i < index) {
+      index = i;
     }
   }));
   // strip loaders
