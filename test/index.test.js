@@ -96,6 +96,14 @@ describe('eslint-import-resolver-module-resolver', () => {
           path: path.resolve(__dirname, './examples/components/c1.js'),
         });
     });
+
+    it('should support multiple loaders for an alias with an exclamation mark', () => {
+      expect(resolverPlugin.resolve('style-loader!css-loader!less-loader!!src/c1', path.resolve('./test/examples/components/sub/sub/c2.js'), opts))
+        .toEqual({
+          found: true,
+          path: path.resolve(__dirname, './examples/components/c1.js'),
+        });
+    });
   });
 
   describe('with specific file extensions', () => {
@@ -119,6 +127,14 @@ describe('eslint-import-resolver-module-resolver', () => {
 
     it('should return `true` when mapped to a file with an expected extension', () => {
       expect(resolverPlugin.resolve('components/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), extensionOpts))
+        .toEqual({
+          found: true,
+          path: path.resolve(__dirname, './examples/components/c3.jsx'),
+        });
+    });
+
+    it('should return `true` when alias contains an exclamation mark', () => {
+      expect(resolverPlugin.resolve('!src/c3', path.resolve('./test/examples/components/subcomponent/sub/c2'), extensionOpts))
         .toEqual({
           found: true,
           path: path.resolve(__dirname, './examples/components/c3.jsx'),
