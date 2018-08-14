@@ -4,7 +4,8 @@
       "root": ["./test/examples/**"],
       "alias": {
         "components": "./test/examples/components",
-        "babel-plugin": "babel-plugin-module-resolver"
+        "babel-plugin": "babel-plugin-module-resolver",
+        "!src": "./test/examples/components"
       },
       "extensions": [".js", ".customExt"]
     }]

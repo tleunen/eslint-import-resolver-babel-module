@@ -37,11 +37,18 @@ function getPluginOptions(file, defaultOptions) {
   );
 }
 
-function stripWebpack(src) {
+function stripWebpack(src, alias) {
   let source = src;
-
+  const aliases = Object.keys(alias);
+  let index = source.length;
+  aliases.forEach(((element) => {
+    const i = source.indexOf(element);
+    if (i >= 0 && i < index) {
+      index = i;
+    }
+  }));
   // strip loaders
-  const finalBang = source.lastIndexOf('!');
+  const finalBang = index ? source.lastIndexOf('!', index - 1) : -1;
   if (finalBang >= 0) {
     source = source.slice(finalBang + 1);
   }
@@ -51,7 +58,6 @@ function stripWebpack(src) {
   if (finalQuestionMark >= 0) {
     source = source.slice(0, finalQuestionMark);
   }
-
   return source;
 }
 
@@ -94,7 +100,7 @@ exports.resolve = (source, file, opts) => {
       },
     );
 
-    const finalSource = stripWebpack(source);
+    const finalSource = stripWebpack(source, pluginOptions.alias);
     const src = resolvePath(finalSource, file, pluginOptions);
 
     const extensions = options.extensions || pluginOptions.extensions;
