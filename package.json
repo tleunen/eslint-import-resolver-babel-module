@@ -58,8 +58,8 @@
     "lint": "eslint src test",
     "compile": "babel src --out-dir lib",
     "pretest": "npm run lint",
-    "test": "npm run test:suite --coverage",
-    "test:suite": "jest",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "prepare": "npm run compile",
     "release": "standard-version"
