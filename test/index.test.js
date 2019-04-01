@@ -193,4 +193,14 @@ describe('eslint-import-resolver-module-resolver', () => {
       });
     });
   });
+
+  describe('usage in a monorepo', () => {
+    it('should return `true` when mapped to a file', () => {
+      expect(resolverPlugin.resolve('~/item', path.resolve('./test/examples/monorepo/my-lib/src/item'), extensionOpts))
+        .toEqual({
+          found: true,
+          path: path.resolve(__dirname, './examples/monorepo/my-lib/src/item.js'),
+        });
+    });
+  });
 });
