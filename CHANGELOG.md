@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.0.1...v5.1.0) (2019-04-25)
+
+
+### Features
+
+* Add monorepo support ([#101](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/101)) ([f932339](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/f932339)), closes [#100](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/100)
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.0.0...v5.0.1) (2019-01-29)
 
