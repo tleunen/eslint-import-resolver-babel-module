@@ -1,0 +1,11 @@
+{
+  "name": "monorepo",
+  "version": "0.0.0",
+  "description": "Root of monorepo",
+  "private": true,
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
