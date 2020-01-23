@@ -32,6 +32,7 @@ function getPluginOptions(file, cwd, defaultOptions) {
       cwd: plugin.options.cwd || config.cwd,
       root: config.root.concat(plugin.options.root || []),
       alias: Object.assign(config.alias, plugin.options.alias || {}),
+      resolvePath: plugin.options.resolvePath || config.resolvePath,
       extensions: plugin.options.extensions || config.extensions,
     }),
     defaultOptions,
@@ -98,12 +99,14 @@ exports.resolve = (source, file, opts) => {
         cwd: options.cwd || projectRootDir,
         root: options.root || [],
         alias: options.alias || {},
+        resolvePath: options.resolvePath,
         extensions: options.extensions || defaultExtensions,
       },
     );
 
     const finalSource = stripWebpack(source, pluginOptions.alias);
-    const src = resolvePath(finalSource, file, pluginOptions);
+    const resolvePathFunc = pluginOptions.resolvePath || resolvePath;
+    const src = resolvePathFunc(finalSource, file, pluginOptions);
 
     const extensions = options.extensions || pluginOptions.extensions;
 
