@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.2"></a>
+## [5.1.2](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.1.1...v5.1.2) (2020-01-23)
+
+
+### Bug Fixes
+
+* Add support for custom resolvePath from babel plugin ([#109](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/109)) ([5708051](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/5708051))
+
+
+
 <a name="5.1.1"></a>
 ## [5.1.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.1.0...v5.1.1) (2020-01-07)
 
