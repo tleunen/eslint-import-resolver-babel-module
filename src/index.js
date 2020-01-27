@@ -1,16 +1,17 @@
 const path = require('path');
 const resolve = require('resolve');
 const pkgUp = require('pkg-up');
+const findBabelConfig = require('find-babel-config');
 const { resolvePath } = require('babel-plugin-module-resolver');
 const { OptionManager } = require('@babel/core');
 
-function getPlugins(file, cwd) {
+function getPlugins(file) {
   try {
     const manager = new OptionManager();
     const result = manager.init({
       babelrc: true,
       filename: file,
-      cwd,
+      cwd: path.dirname(findBabelConfig.sync(file).file),
     });
 
     return result.plugins.filter(plugin => plugin.key === 'module-resolver');
@@ -24,8 +25,8 @@ function getPlugins(file, cwd) {
   }
 }
 
-function getPluginOptions(file, cwd, defaultOptions) {
-  const instances = getPlugins(file, cwd);
+function getPluginOptions(file, defaultOptions) {
+  const instances = getPlugins(file);
 
   return instances.reduce(
     (config, plugin) => ({
@@ -85,7 +86,6 @@ exports.resolve = (source, file, opts) => {
   try {
     const pluginOptions = getPluginOptions(
       file,
-      projectRootDir,
       {
         // if .babelrc doesn't exist, try to get the configuration information from `options`,
         // which gets defined by the eslint configuration file.

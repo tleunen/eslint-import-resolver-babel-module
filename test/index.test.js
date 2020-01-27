@@ -195,11 +195,21 @@ describe('eslint-import-resolver-module-resolver', () => {
   });
 
   describe('usage in a monorepo', () => {
-    it('should return `true` when mapped to a file', () => {
+    it('should return `true` when mapped to a file based on babel config in the child package', () => {
       expect(resolverPlugin.resolve('~/item', path.resolve('./test/examples/monorepo/my-lib/src/item'), extensionOpts))
         .toEqual({
           found: true,
           path: path.resolve(__dirname, './examples/monorepo/my-lib/src/item.js'),
+        });
+    });
+
+    it('should return `true` when mapped to a file based on root babel config', () => {
+      expect(resolverPlugin.resolve(
+        'Common/Test2', path.resolve('./test/examples/monorepo/src/components/Common/Test1'), extensionOpts,
+      ))
+        .toEqual({
+          found: true,
+          path: path.resolve(__dirname, './examples/monorepo/src/components/Common/Test2/Test.js'),
         });
     });
   });

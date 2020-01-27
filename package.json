@@ -32,6 +32,7 @@
     "import"
   ],
   "dependencies": {
+    "find-babel-config": "^1.2.0",
     "pkg-up": "^2.0.0",
     "resolve": "^1.10.0"
   },
