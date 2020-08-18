@@ -11,7 +11,7 @@ function getPlugins(file, cwd, babelOptions) {
       babelrc: true,
       filename: file,
       cwd,
-      ...babelOptions
+      ...babelOptions,
     });
 
     return result.plugins.filter(plugin => plugin.key === 'module-resolver');
@@ -102,7 +102,7 @@ exports.resolve = (source, file, opts) => {
         alias: options.alias || {},
         resolvePath: options.resolvePath,
         extensions: options.extensions || defaultExtensions,
-        babelOptions: options.babelOptions || {}
+        babelOptions: options.babelOptions || {},
       },
     );
 
