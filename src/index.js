@@ -4,13 +4,14 @@ const pkgUp = require('pkg-up');
 const { resolvePath } = require('babel-plugin-module-resolver');
 const { OptionManager } = require('@babel/core');
 
-function getPlugins(file, cwd) {
+function getPlugins(file, cwd, babelOptions) {
   try {
     const manager = new OptionManager();
     const result = manager.init({
       babelrc: true,
       filename: file,
       cwd,
+      ...babelOptions,
     });
 
     return result.plugins.filter(plugin => plugin.key === 'module-resolver');
@@ -25,7 +26,7 @@ function getPlugins(file, cwd) {
 }
 
 function getPluginOptions(file, cwd, defaultOptions) {
-  const instances = getPlugins(file, cwd);
+  const instances = getPlugins(file, cwd, defaultOptions.babelOptions);
 
   return instances.reduce(
     (config, plugin) => ({
@@ -101,6 +102,7 @@ exports.resolve = (source, file, opts) => {
         alias: options.alias || {},
         resolvePath: options.resolvePath,
         extensions: options.extensions || defaultExtensions,
+        babelOptions: options.babelOptions || {},
       },
     );
 
