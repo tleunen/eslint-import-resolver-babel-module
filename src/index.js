@@ -112,7 +112,10 @@ exports.resolve = (source, file, opts) => {
     const src = resolvePathFunc(finalSource, file, pluginOptions);
     const absoluteSrc = path.join(path.dirname(file), src);
 
-    if (options.allowExistingDirectories && fs.existsSync(absoluteSrc)) {
+    if (options.allowExistingDirectories
+      && fs.existsSync(absoluteSrc)
+      && fs.lstatSync(absoluteSrc).isDirectory()
+    ) {
       return { found: true, path: absoluteSrc };
     }
 
