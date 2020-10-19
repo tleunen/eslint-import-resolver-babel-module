@@ -2,12 +2,9 @@
   "presets": [
     ["@babel/env", {
       "targets": {
-        "node": 6
+        "node": 10
       },
-      "loose": true,
+      "loose": true
     }]
-  ],
-  "plugins": [
-    ["@babel/proposal-object-rest-spread", { "loose": true, "useBuiltIns": true }]
   ]
 }

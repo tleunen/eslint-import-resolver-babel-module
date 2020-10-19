@@ -8,7 +8,7 @@
     "url": "https://github.com/tleunen/eslint-import-resolver-babel-module.git"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=10.0.0"
   },
   "files": [
     "lib"
@@ -36,18 +36,15 @@
     "resolve": "^1.10.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "babel-core": "^7.0.0-0",
-    "babel-jest": "^24.0.0",
-    "babel-plugin-module-resolver": "^3.1.3",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "jest": "^24.0.0",
-    "lodash": "^4.17.11",
+    "babel-jest": "^26.6.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "eslint": "^7.11.0",
+    "jest": "^26.6.0",
+    "lodash": "^4.17.20",
     "standard-version": "^9.0.0"
   },
   "peerDependencies": {
