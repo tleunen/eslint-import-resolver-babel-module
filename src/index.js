@@ -81,7 +81,7 @@ exports.resolve = (source, file, opts) => {
   const options = opts || {};
   if (resolve.isCore(source)) return { found: true, path: null };
 
-  const projectRootDir = path.dirname(pkgUp.sync(file));
+  const projectRootDir = path.dirname(pkgUp.sync({cwd: file}));
 
   try {
     const pluginOptions = getPluginOptions(
