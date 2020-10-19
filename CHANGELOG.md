@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.1.2...v5.2.0) (2020-10-19)
+
+
+### Features
+
+* Add support for passing `babelOptions` to `OptionsManager#init` ([#113](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/113)) ([c23f28d](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/c23f28d))
+
+
+
 <a name="5.1.2"></a>
 ## [5.1.2](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.1.1...v5.1.2) (2020-01-23)
 
