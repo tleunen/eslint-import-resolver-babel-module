@@ -38,6 +38,24 @@ And see [babel-plugin-module-resolver][babel-plugin-module-resolver] to know how
 }
 ```
 
+## Directory Imports
+
+Some babel plugins like [babel-plugin-import-directory](https://github.com/Anmo/babel-plugin-import-directory) or [babel-plugin-wildcard](https://github.com/vihanb/babel-plugin-wildcard) allow to import directories (i.e. each file inside a directory) as an object. In order to support this, you can activate the `allowExistingDirectories` option as follows:
+
+```
+"settings": {
+  "import/resolver": {
+    "babel-module": { allowExistingDirectories: true }
+  }
+}
+```
+
+Now when you import a directory like this, the ESLint plugin won't complain and recognize the existing directory:
+
+```
+import * as Items from './dir';
+```
+
 ## License
 
 MIT, see [LICENSE.md](/LICENSE.md) for details.
