@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [5.3.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.2.0...v5.3.0) (2021-04-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Now requires Node 10
+
+### Features
+
+* Allow early exit on existing directories ([#115](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/115)) ([f5f205e](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/f5f205ea76e7ed31ce650b359ca7cc9d82f72d42))
+
+
+* Update dev dependencies ([6376546](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/63765467398c4150a707cf3d1b6398d2ed95bbeb))
 
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.1.2...v5.2.0) (2020-10-19)
