@@ -203,4 +203,14 @@ describe('eslint-import-resolver-module-resolver', () => {
         });
     });
   });
+
+  describe('allowExistingDirectories', () => {
+    it('should return `true` when directory exists', () => {
+      expect(resolverPlugin.resolve('components/sub', path.resolve('./test/examples/components/sub/c1'), { ...opts, allowExistingDirectories: true }))
+        .toEqual({
+          found: true,
+          path: `${path.resolve(__dirname, './examples/components/sub')}/`,
+        });
+    });
+  });
 });
