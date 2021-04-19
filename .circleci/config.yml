@@ -32,6 +32,17 @@ jobs:
           command: npm install
       - run:
           name: Test
+          command: npm run test
+  test_with_node_15:
+    docker:
+      - image: circleci/node:15
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
           command: npm run test:coverage
       - run:
           name: Deploy coverage
@@ -43,3 +54,4 @@ workflows:
       - test_with_node_10
       - test_with_node_12
       - test_with_node_14
+      - test_with_node_15
