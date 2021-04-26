@@ -16,10 +16,10 @@ describe('eslint-import-resolver-module-resolver', () => {
   });
 
   it('should return `true` when mapped to a npm module', () => {
-    expect(resolverPlugin.resolve('babel-plugin', path.resolve('./test/examples/file1'), opts))
+    expect(resolverPlugin.resolve('pkg-up', path.resolve('./test/examples/file1'), opts))
       .toEqual({
         found: true,
-        path: path.resolve(__dirname, '../node_modules/babel-plugin-module-resolver/lib/index.js'),
+        path: path.resolve(__dirname, '../node_modules/pkg-up/index.js'),
       });
   });
 
