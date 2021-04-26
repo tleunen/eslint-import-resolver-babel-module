@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.3.1](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.3.0...v5.3.1) (2021-04-26)
+
+
+### Bug Fixes
+
+* fix npm import ([#118](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/118)) ([0289f28](https://github.com/tleunen/eslint-import-resolver-babel-module/commit/0289f288bb9dea21c3cba9faa346acd5877b18d4)), closes [#117](https://github.com/tleunen/eslint-import-resolver-babel-module/issues/117)
+
 ## [5.3.0](https://github.com/tleunen/eslint-import-resolver-babel-module/compare/v5.2.0...v5.3.0) (2021-04-19)
 
 
