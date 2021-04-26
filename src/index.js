@@ -110,10 +110,12 @@ exports.resolve = (source, file, opts) => {
     const finalSource = stripWebpack(source, pluginOptions.alias);
     const resolvePathFunc = pluginOptions.resolvePath || resolvePath;
     const src = resolvePathFunc(finalSource, file, pluginOptions);
-    const absoluteSrc = path.join(path.dirname(file), src);
+    if (src) {
+      const absoluteSrc = path.join(path.dirname(file), src);
 
-    if (options.allowExistingDirectories && fs.existsSync(absoluteSrc)) {
-      return { found: true, path: absoluteSrc };
+      if (options.allowExistingDirectories && fs.existsSync(absoluteSrc)) {
+        return { found: true, path: absoluteSrc };
+      }
     }
 
     const extensions = options.extensions || pluginOptions.extensions;
